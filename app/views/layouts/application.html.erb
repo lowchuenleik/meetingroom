@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>One Month Rails Project</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>New Age - Start Bootstrap Theme</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <!-- Navigation Bar -->
+    <!--
+    <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
+      <div class="container">
+        <%= link_to "One Month Rails", root_path, class: "navbar-brand" %>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Contact", contact_us_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Tweets", tweets_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Venues", venues_path, class: "nav-link" %></li>
+        </ul>
+        <ul class="navbar-nav">
+          <% if user_signed_in? %>
+            <li class="nav-item"><%= link_to "Log out", signout_path, method: :delete, class: "nav-link" %></li>
+          <% else %>
+            <li class="nav-item"><%= link_to "Sign in", signin_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Sign up", signup_path, class: "btn btn-primary" %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+    -->
+
+    <nav class="navbar navbar-toggleable-sm navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top"><strong><%= link_to "Hang", root_path, class: "nav-link" %></strong></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Contact", contact_us_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Tweets", tweets_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Venues", venues_path, class: "nav-link" %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- This is a comment. control and slash -->
+    <!-- Flash Messages -->
+
+    <% flash.each do |name, message| %>
+      <%= content_tag(:div, message, class: "alert alert-info #{name}")%>
+    <% end %>
+
+    <!-- Page Content -->
+    <%= yield %>
+    
+    <!-- Footer -->
+    <footer class="small text-muted">
+      <div class="container">
+        <hr>
+        <center>
+          <p>© 2016 Simon Oates</p>
+        </center>
+      </div>
+    </footer>
+    <!-- 
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+     -->
+  </body>
+</html>

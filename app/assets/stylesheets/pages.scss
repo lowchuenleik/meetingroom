@@ -1,0 +1,35 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.jumbotron-home {
+    background-image: url(image_path('home-bg.jpg'));
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+}
+
+.container {
+  padding-top: .5rem;
+}
+
+div#Venue {
+
+  margin-bottom: 1rem;
+
+}
+
+.carousel-item {
+  height: 65vh;
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
