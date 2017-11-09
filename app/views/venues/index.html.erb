@@ -1,7 +1,7 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
 
-  <h1 style="padding-top: 3rem ;">Venues</h1>
+  <h1>Venues</h1>
 
   <br>
 
@@ -29,13 +29,11 @@
   </table>
   -->
 
-  <div class="card card-info p-3 text-left">
-    <blockquote class="card-blockquote">
+  <div class="card card-danger p-3 text-left">
       <p>Welcome to our booking page, we hope you find somewhere you may like.</p>
         <small>
           <cite title="Source Title">Hang Team</cite>
         </small>
-    </blockquote>
   </div>
   <br>
   <div class="row justify-content-lg-center">
@@ -43,7 +41,7 @@
       <div class="card-deck">
         <% @venues.each do |venue| %>
           <div class="col-md-4">
-            <div class="card" id="Venue">
+            <div class="card" id="Venue" style="margin-bottom: .5em">
               <img class="card-img-top" src="http://placehold.it/350x250" alt="Card image cap">
               <div class="card-block">
                 <h2 class="float-right">£<%= venue.price %></h2>
