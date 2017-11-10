@@ -32,7 +32,7 @@
     <div class="jumbotron jumbotron-home">
         <div class="container">
             <h1>Welcome back!</h1>
-            <p>This is a template for people who come back!.</p>
+            <p>Glad to see you're returning :) </p>
             <%= link_to "Come and check out our venues", venues_path, class: "btn btn-primary btn-lg" %> 
         </div>
     </div>
@@ -40,9 +40,12 @@
 <% else %>
     <div class="jumbotron jumbotron-home">
         <div class="container">
-            <h1>Welcome to my website!</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <%= link_to "Learn more »", "#", class: "btn btn-primary btn-lg" %> 
+            <div class="col-md-8">
+              <h1 id="landing">Welcome to <strong> Hang</strong></h1>
+              <br>
+              <p>We're extremely excited to bring you Hang, our tailored solution to the growing need for meeting spaces in urban landscapes. We're looking to bridge the divide between trendy spaces in hot locations and a booming business scene. Book your space today, on the fly, at the tap of a finger. </p>
+              <%= link_to "Sign up now", signup_path, class: "btn btn-primary btn-lg" %>
+            </div>
         </div>
     </div>
     <div class="container">

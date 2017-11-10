@@ -14,7 +14,9 @@
 
     <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
       <div class="container">
-        <%= link_to "One Month Rails", root_path, class: "navbar-brand "%>
+        <div class="navbar-header">
+          <%= link_to image_tag("hang-white.png", alt:"logo", id: "logo1") , root_path, class: "navbar-brand" %>
+        </div>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
           <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
@@ -47,7 +49,7 @@
       <div class="container">
         <hr>
         <center>
-          <p>© 2016 Simon Oates</p>
+          <p>© 2016 Hangspaces</p>
         </center>
       </div>
     </footer>

@@ -3,16 +3,30 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .jumbotron-home {
-    background-image: url(image_path('home-bg.jpg'));
+    background-image: url(image_path('city-bg.jpg'));
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    height: 900px;
 
 }
 
-.navbar {
-  
-  margin-bottom: .75em
+.navbar-brand{
+
+    max-height: 40px;
+    overflow: visible;
+    padding-top: 0;
+    padding-bottom: 0;
+
+}
+
+#logo1 {
+  max-height: 30px
+}
+
+h1#landing {
+
+  font-size: 60px;
 }
 
 .carousel-item {
