@@ -38,6 +38,8 @@ gem 'bootstrap', '4.0.0.alpha6'
 gem 'activeadmin','~>1.0.0.pre4'
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower'
 
+gem 'dotenv-rails', groups: [:development, :test], require: 'dotenv/rails-now'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -58,3 +60,6 @@ group :production do
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'shrine'
+gem 'aws-sdk-s3'
