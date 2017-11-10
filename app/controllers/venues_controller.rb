@@ -11,7 +11,7 @@ class VenuesController < ApplicationController
 
   # GET /venues/1
   # GET /venues/1.json
-  def show
+  def showw
   end
 
   # GET /venues/new
