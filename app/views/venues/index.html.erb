@@ -1,27 +1,29 @@
+<div class="row-fluid">
+  <nav class="navbar navbar-toggleable-sm navbar-light bg-faded" style="margin-bottom:5px">
+    <div class="container">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#"> Search </a>
+        <div class="collapse navbar-collapse main-nav">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Filters here <span class="sr-only">(current)</span></a>
+            </li>
+              <a class="nav-link disabled" href="#">Invalid sel</a>
+            </li>
+          </ul>
+          <form class="form-inline my-4 my-lg-0">
+            <input class="form-control mr-sm-4" type="text" placeholder="Find your venue">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    <nav>
+  </div>
+
 <div class="container">
   <p id="notice"><%= notice %></p>
-
-  <div class="navbar navbar-toggleable-sm navbar-light bg-faded" style="margin-top:70px">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#"> Search </a>
-      <div class="collapse navbar-collapse main-nav">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Filters here <span class="sr-only">(current)</span></a>
-          </li>
-            <a class="nav-link disabled" href="#">Invalid sel</a>
-          </li>
-        </ul>
-        <form class="form-inline my-4 my-lg-0">
-          <input class="form-control mr-sm-4" type="text" placeholder="Find your venue">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-
-
 
   <h1>Venues</h1>
 
@@ -67,7 +69,7 @@
               <img class="card-img-top" src="http://placehold.it/350x250" alt="Card image cap">
               <div class="card-block">
                 <h2 class="float-right">£<%= venue.price %></h2>
-                <h4 class="card-title"><%= venue.name %></h4>
+                <h4 class="card-title"><%= link_to venue.name , venue_path(venue), style:"color:black" %></h4>
                 <p class="font-italic lead card-text">Mandarin Oriental</p>
               </div>
               <div class="card-footer">

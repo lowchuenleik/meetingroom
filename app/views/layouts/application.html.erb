@@ -11,28 +11,29 @@
   <body data-spy="scroll" data-offset="75">
 
     <!-- Navigation Bar -->
-
-    <nav class="navbar navbar-toggleable-sm fixed-top navbar-inverse bg-inverse">
-      <div class="container">
-        <div class="navbar-header">
-          <%= link_to image_tag("hang-white.png", alt:"logo", id: "logo1") , root_path, class: "navbar-brand" %>
+    <div class="row-fluid" style="margin-bottom:55px">
+      <nav class="navbar navbar-toggleable-sm fixed-top navbar-inverse bg-inverse" id="navbar">
+        <div class="container">
+          <div class="navbar-header">
+            <%= link_to image_tag("hang-white.png", alt:"logo", id: "logo1") , root_path, class: "navbar-brand" %>
+          </div>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Contact", contact_us_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Venues", venues_path, class: "nav-link" %></li>
+          </ul>
+          <ul class="navbar-nav">
+            <% if user_signed_in? %>
+              <li class="nav-item"><%= link_to "Log out", signout_path, method: :delete, class: "nav-link" %></li>
+            <% else %>
+              <li class="nav-item"><%= link_to "Sign in", signin_path, class: "nav-link" %></li>
+              <li class="nav-item"><%= link_to "Sign up", signup_path, class: "btn btn-primary" %></li>
+            <% end %>
+          </ul>
         </div>
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "Contact", contact_us_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "Venues", venues_path, class: "nav-link" %></li>
-        </ul>
-        <ul class="navbar-nav">
-          <% if user_signed_in? %>
-            <li class="nav-item"><%= link_to "Log out", signout_path, method: :delete, class: "nav-link" %></li>
-          <% else %>
-            <li class="nav-item"><%= link_to "Sign in", signin_path, class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "Sign up", signup_path, class: "btn btn-primary" %></li>
-          <% end %>
-        </ul>
-      </div>
-    </nav>
+      </nav>
+    </div>
 
     <!-- This is a comment. control and slash -->
     <!-- Flash Messages -->

@@ -3,6 +3,7 @@
 <p>
   <strong>Image data:</strong>
   <%= @photo.image_data %>
+  <%= image_tag @photo.image.url(public:true) %>
 </p>
 
 <%= link_to 'Edit', edit_photo_path(@photo) %> |
