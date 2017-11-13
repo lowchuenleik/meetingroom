@@ -70,7 +70,7 @@
               <div class="card-block">
                 <h2 class="float-right">£<%= venue.price %></h2>
                 <h4 class="card-title"><%= link_to venue.name , venue_path(venue), style:"color:black" %></h4>
-                <p class="font-italic lead card-text">Mandarin Oriental</p>
+                <p class="font-italic lead card-text"><%= venue.byline%></p>
               </div>
               <div class="card-footer">
                   <span><%= link_to "Book now", "#", class: "btn btn-primary btn-md" %></span>

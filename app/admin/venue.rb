@@ -12,4 +12,27 @@ ActiveAdmin.register Venue do
 #   permitted
 # end
 
+	permit_params :name, :price, :byline, :capacity
+
+	form do |f|
+		f.semantic_errors
+		f.inputs do
+			f.input :name
+			f.input :price
+			f.input :byline
+			f.input :capacity
+		end
+		f.actions
+	end
+
+	index do
+		id_column
+		column :name
+		column :price
+		column :byline
+		column :capacity
+		actions
+	end
+
+
 end
