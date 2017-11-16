@@ -65,3 +65,4 @@ gem 'shrine'
 gem 'aws-sdk-s3'
 gem "font-awesome-rails"
 gem 'bootstrap-datepicker-rails'
+gem "paperclip", "~> 5.0.0"
