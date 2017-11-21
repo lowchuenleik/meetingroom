@@ -12,7 +12,13 @@
 //
 //= require rails-ujs
 //= require_tree .
-//= require jquery3
-//= require bootstrap-datepicker
-//= require bootstrap-sprockets
+//= require jquery.min
 //= require turbolinks
+//= require tether.min
+//= require popper.min
+//= require chart
+//= require tablesorter.min
+//= require toolkit
+//= require bootstrap-datepicker
+//= require application_theme
+//= require bootstrap-sprockets

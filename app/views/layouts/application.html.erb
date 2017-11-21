@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- 
+    <% if content_for? :admin_venues %>
+      <%= yield :admin_venues %>
+    <% end %>
+     -->
     <title>Hang - Meetings Sorted</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
   </head>
 
-  <body data-spy="scroll" data-offset="75">
+  <body data-spy="scroll" data-offset="0">
 
     <!-- Navigation Bar -->
-    <div class="row-fluid" style="margin-bottom:55px">
-      <nav class="navbar navbar-toggleable-sm fixed-top navbar-inverse bg-inverse" id="navbar">
+    <div class="row-fluid">
+      <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse" id="navbar">
         <div class="container">
           <div class="navbar-header">
             <%= link_to image_tag("hang-white.png", alt:"logo", id: "logo1") , root_path, class: "navbar-brand" %>
@@ -42,6 +48,8 @@
       <%= content_tag(:div, message, class: "alert alert-info #{name}")%>
     <% end %>
 
+    <!-- Div to protect from navbar covering content! -->
+
     <!-- Page Content -->
     <%= yield %>
     
@@ -57,6 +65,8 @@
     <!-- 
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+     
+     %= render 'layouts/dashboard_theme_partial' %> 
      -->
   </body>
 </html>

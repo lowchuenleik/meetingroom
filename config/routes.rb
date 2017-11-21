@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   	get "signup", to:'devise/registrations#new'
   end
   root "pages#home"
+  get 'adminv', to:'admins#admin'
   get 'about', to: 'pages#about'
   get 'contact_us', to: 'pages#contact-us' # the latter is the FILE_NAME
   ActiveAdmin.routes(self)

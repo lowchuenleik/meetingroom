@@ -10,6 +10,7 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   # GET /bookings/1.json
   def show
+    @bookings = Booking.find(params[:id])
   end
 
   # GET /bookings/new
@@ -24,7 +25,7 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
-    @booking = Booking.new(booking_params)
+    @booking = current_user.bookings.new(booking_params)
 
     respond_to do |format|
       if @booking.save
