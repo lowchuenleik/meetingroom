@@ -4,6 +4,11 @@
 
 	<%= render 'form', booking: @booking %>
 
+    <div class="btn-toolbar-item input-with-icon">
+      <input type="text" value="01/01/15 - 01/08/15" class="form-control" data-provide="datepicker">
+      <span class="icon icon-calendar"></span>
+    </div>
+
 	<%= link_to 'Back', bookings_path %>
 
 </div>

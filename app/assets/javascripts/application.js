@@ -10,6 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery3
+//= require application_theme
 //= require rails-ujs
 //= require_tree .
 //= require jquery.min
@@ -19,6 +21,4 @@
 //= require chart
 //= require tablesorter.min
 //= require toolkit
-//= require bootstrap-datepicker
-//= require application_theme
 //= require bootstrap-sprockets
