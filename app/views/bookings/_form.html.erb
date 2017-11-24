@@ -1,31 +1,32 @@
-<%= form_with(model: booking, local: true) do |form| %>
-  <% if booking.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
-
-      <ul>
-      <% booking.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= render partial: "layouts/errors", locals: { object: booking } %>
+<%= form_for booking do |f| %>
+  <%= client_fields(f, booking, client) %>
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :booking_name %>
+    <p>
+      <%= label_tag "booking[booking_time][date]", "Date" %>
+      <%= text_field_tag "booking[booking_time][date]", booking_date(booking), class: "datepicker" %>
+    </p>
   </div>
-
   <div class="field">
-    <%= form.label :date %>
-    <%= form.text_field :date, id: :booking_date %>
+    <p id="time">
+      <%= label_tag "booking[booking_time][hour]", "Time" %>
+      <%= hour_selector("booking[booking_time][hour]", booking) %> : 
+      <%= min_selector("booking[booking_time][min]", booking) %> 
+    </p>
   </div>
-
-  <div class='field input-with-icon'>
-
-    <%= form.text_field :date,id: :booking_date, class: 'form-control', "data-provide" => 'datepicker' %>
-    <span class="icon icon-calendar"></span>
+  <div class="field">
+    <p>
+      <%= f.label :duration %> 
+      <%= duration_hour_field("booking[duration][hour]", booking) %>
+      <%= duration_minute_field("booking[duration][min]", booking) %>
+    </p>
   </div>
-
-  <%= form.submit class:'btn btn-primary' %>
+  <div class="field">
+    <p>
+      <%= f.label :price %> 
+      <%= f.number_field :price, step: 0.25, value: float_two_decimals(booking.price) %>
+    </p>  
+  </div>
+  <%= venue_fields(f, booking, venue) %>
+  <p><%= f.submit %></p>
 <% end %>

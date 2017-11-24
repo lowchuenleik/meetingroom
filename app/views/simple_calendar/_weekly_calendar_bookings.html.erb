@@ -1,0 +1,8 @@
+<%= week_calendar events: bookings do |date, bookings| %>
+  
+  <% bookings.each do |booking| %>
+    <div class="booking<%= highlight_booking(booking) %>" style="<%= booking_position(booking) %> <%= booking_height(booking) %>">
+      <%= link_to(booking_text(booking), edit_booking_path(booking) ) %>
+    </div>
+  <% end %>
+<% end %>

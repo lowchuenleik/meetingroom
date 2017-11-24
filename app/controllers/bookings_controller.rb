@@ -1,75 +1,75 @@
 class BookingsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
-
-  # GET /bookings
-  # GET /bookings.json
-  def index
-    @bookings = Booking.all
+  before_action :set_bookings, only: [:index, :show, :edit]
+  before_action :set_client, only: [:index, :new, :edit]
+  before_action :set_venue, only: [:index, :new, :edit]
+    
+  def index 
+    @upcoming_bookings = current_user.upcoming_bookings
+  end 
+  
+  def show 
   end
-
-  # GET /bookings/1
-  # GET /bookings/1.json
-  def show
-    @bookings = Booking.find(params[:id])
+  
+  def new 
+    @bookings = current_user.bookings.select { |a| a.persisted? }
+    @booking = current_user.bookings.build
   end
-
-  # GET /bookings/new
-  def new
-    @booking = current_user.bookings.new
-  end
-
-  # GET /bookings/1/edit
-  def edit
-  end
-
-  # POST /bookings
-  # POST /bookings.json
-  def create
-    @booking = current_user.bookings.new(booking_params)
-
-    respond_to do |format|
-      if @booking.save
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-        format.json { render :show, status: :created, location: @booking }
-      else
-        format.html { render :new }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+  
+  def create 
+    @booking = Booking.new(booking_params.merge(user_id: current_user.id))
+    if @booking.valid?
+      @booking.save
+      redirect_to bookings_path
+    else 
+      @booking.user = nil
+      @bookings = current_user.bookings.select { |a| a.persisted? }
+      render :new
     end
   end
-
-  # PATCH/PUT /bookings/1
-  # PATCH/PUT /bookings/1.json
-  def update
-    respond_to do |format|
-      if @booking.update(booking_params)
-        format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
-        format.json { render :show, status: :ok, location: @booking }
-      else
-        format.html { render :edit }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+  
+  def edit 
+  end
+  
+  def update 
+    if @booking.update(booking_params)
+      redirect_to bookings_path
+    else 
+      set_bookings
+      render :edit
     end
   end
-
-  # DELETE /bookings/1
-  # DELETE /bookings/1.json
-  def destroy
-    @booking.destroy
-    respond_to do |format|
-      format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
-      format.json { head :no_content }
+  
+  def destroy 
+    @booking.destroy 
+    redirect_to bookings_path
+  end
+  
+  private 
+  
+  def set_client 
+    @client = current_user.clients.find_by(id: params[:client_id])
+  end
+  
+  def set_venue
+    @venue = current_user.venues.find_by(id: params[:venue_id])
+  end
+  
+  def set_booking
+    @booking = current_user.bookings.find_by(id: params[:id])
+    if @booking.nil? 
+      flash[:error] = "Booking not found."
+      redirect_to bookings_path
     end
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_booking
-      @booking = Booking.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def booking_params
-      params.require(:booking).permit(:name, :date)
-    end
+  
+  def set_bookings
+    @bookings = current_user.bookings.order(booking_time: :desc)
+  end
+  
+  def booking_params
+    params.require(:booking).permit(:client_id, :price, :venue_id, venue_attributes: [:nickname], client_attributes: [:name], booking_time: [:date, :hour, :min], duration: [:hour, :min])
+  end
+  
 end

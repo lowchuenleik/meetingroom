@@ -1,6 +1,17 @@
 <h1>Editing Booking</h1>
 
-<%= render 'form', booking: @booking %>
+<div class="row">
+  <div class="col-md-4">
+    <h1>Edit Booking</h1>
+    <%= render partial: "form", locals: { booking: @booking, client: @client, venue: @venue } %>
+    <p>
+      <%= link_to "Delete", @booking, method: :delete, data: { confirm: "Are you sure you want to delete this booking?" } %>
+    </p>
+  </div>
+  <div class="col-md-8">
+    <%= add_weekly_calendar(@bookings) %>    
+  </div>
+</div>
 
-<%= link_to 'Show', @booking %> |
-<%= link_to 'Back', bookings_path %>
+
+

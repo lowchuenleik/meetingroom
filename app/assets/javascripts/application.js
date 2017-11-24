@@ -14,7 +14,7 @@
 //= require application_theme
 //= require rails-ujs
 //= require_tree .
-//= require jquery.min
+//= require jquery-ui
 //= require turbolinks
 //= require tether.min
 //= require popper.min

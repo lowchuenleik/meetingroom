@@ -1,77 +1,61 @@
 class VenuesController < ApplicationController
-
-  before_action :authenticate_user!, except: [:index,:show]
-  before_action :set_venue, only: [:show, :edit, :update, :destroy]
-
-  # GET /venues
-  # GET /venues.json
-  def index
+  before_action :authenticate_user!
+  before_action :set_venue, only: [:client_list, :show, :edit, :update, :destroy]
+  
+  def index 
     @venues = Venue.all
   end
-
-  # GET /venues/1
-  # GET /venues/1.json
-  def show
-    @venue = Venue.find(params[:id])
+  
+  def client_list 
+    @clients = @venue.clients
   end
-
-  # GET /venues/new
-  def new
+  
+  def show 
+    @bookings = @venue.bookings
+  end
+  
+  def new 
     @venue = Venue.new
   end
-
-  # GET /venues/1/edit
-  def edit
-  end
-
-  # POST /venues
-  # POST /venues.json
-  def create
+  
+  def create 
     @venue = Venue.new(venue_params)
-
-    respond_to do |format|
-      if @venue.save
-        format.html { redirect_to @venue, notice: 'Venue was successfully created.' }
-        format.json { render :show, status: :created, location: @venue }
-      else
-        format.html { render :new }
-        format.json { render json: @venue.errors, status: :unprocessable_entity }
-      end
+    if @venue.valid?
+      @venue.user = current_user
+      @venue.save 
+      redirect_to venues_path
+    else 
+      render :new
     end
   end
-
-  # PATCH/PUT /venues/1
-  # PATCH/PUT /venues/1.json
-  def update
-    respond_to do |format|
-      if @venue.update(venue_params)
-        format.html { redirect_to @venue, notice: 'Venue was successfully updated.' }
-        format.json { render :show, status: :ok, location: @venue }
-      else
-        format.html { render :edit }
-        format.json { render json: @venue.errors, status: :unprocessable_entity }
-      end
+  
+  def edit 
+  end 
+  
+  def update 
+    if @venue.update(venue_params)
+      redirect_to venue_path(@venue)
+    else 
+      render :edit
     end
   end
-
-  # DELETE /venues/1
-  # DELETE /venues/1.json
-  def destroy
-    @venue.destroy
-    respond_to do |format|
-      format.html { redirect_to venues_url, notice: 'Venue was successfully destroyed.' }
-      format.json { head :no_content }
+  
+  def destroy 
+    @venue.destroy 
+    redirect_to venues_path
+  end
+  
+  private 
+  
+  def set_venue 
+    @venue = current_user.venues.find_by(id: params[:id])
+    if @venue.nil?
+      flash[:error] = "Venue not found."
+      redirect_to venues_path
     end
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_venue
-      @venue = Venue.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def venue_params
-      params.require(:venue).permit(:name, :price, :image)
-    end
+  
+  def venue_params
+    params.require(:venue).permit(:nickname, :street_address, :city, :state, :zipcode, :business_name)
+  end
 end

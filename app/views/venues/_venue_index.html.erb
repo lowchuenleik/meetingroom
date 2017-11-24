@@ -1,0 +1,17 @@
+<div class="venue row">
+  <div class="col-sm-3">
+    <p class="name"><%= show_nickname(venue) %></p>
+    <p><%= edit_delete_links(venue) %></p>
+  </div>  
+  <div class="col-sm-3">
+    <%= show_address(venue) %>
+  </div>
+  <div class="col-sm-3">
+    <p><%= client_count(venue) %></p>
+  </div>
+  <div class="col-sm-3">
+    <p><%= booking_count(venue) %></p> 
+    <p><%= venue_value(venue) %></p>
+    <p><%= link_to "Add Booking", new_venue_booking_path(venue), class: "btn btn-primary" %></p>
+  </div>
+</div>

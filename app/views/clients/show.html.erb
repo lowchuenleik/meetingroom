@@ -1,0 +1,4 @@
+<h1>Client</h1>
+<%= render @client %>
+<h1>Bookings <%= link_to "+ New", new_client_booking_path(@client) %></h1>
+<%= render @bookings, template: "bookings/booking" %>
