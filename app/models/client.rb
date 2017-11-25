@@ -15,7 +15,6 @@ class Client < ActiveRecord::Base
     
     validates :name, presence: true 
     validates :email, format: { with: /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i, message: 'Please enter a valid email address' }, allow_blank: true
-    validates :phone_number, format: { with: /\A(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}\z/, message: "Please enter a valid phone number (123) 456-7890" }, allow_blank: true
     
     include ActiveModel::Validations
     
