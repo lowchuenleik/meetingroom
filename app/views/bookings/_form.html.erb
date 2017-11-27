@@ -4,7 +4,7 @@
   <div class="field">
     <p>
       <%= label_tag "booking[booking_time][date]", "Date" %>
-      <%= text_field_tag "booking[booking_time][date]", booking_date(booking), class: "datepicker" %>
+      <%= text_field_tag"booking[booking_time][date]", booking_date(booking), class: "form-control","data-provide" => "datepicker" %>
     </p>
   </div>
   <div class="field">
