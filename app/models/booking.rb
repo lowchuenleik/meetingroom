@@ -92,15 +92,14 @@ class Booking < ActiveRecord::Base
         
         def validate 
             if @booking.booking_time
-                # selects the user's bookings from yesterday, 
-                # today and tomorrow
+                # selects the user's bookings from yesterday, today and tomorrow
                 bookings = @user.bookings.select { |a| a.booking_time.midnight == @booking.booking_time.midnight || a.booking_time.midnight == @booking.booking_time - 1.day || a.booking_time.midnight == @booking.booking_time + 1.day }
                 # makes sure that current bookings don't overlap
                 # first checks if an existing booking is still
                 # in progress when the new booking is set to start
                 # next checks if the new booking would still be in 
                 # progress when an existing booking is set to start
-                bookings.each do |booking| 
+                bookings.each do |booking|
                     if @booking != booking 
                         if booking.booking_time <= @booking.booking_time && @booking.booking_time <= booking.end_time || @booking.booking_time <= booking.booking_time && booking.booking_time <= @booking.end_time
                             @booking.errors.add(:booking_time, "is not available.")

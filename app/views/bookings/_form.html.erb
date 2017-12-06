@@ -1,9 +1,9 @@
 <%= render partial: "layouts/errors", locals: { object: booking } %>
-<%= form_for booking do |f| %>
+<%= form_with(model: booking, local: true) do |f| %>
   <%= client_fields(f, booking, client) %>
   <div class="field">
     <p>
-      <%= label_tag "booking[booking_time][date]", "Date" %>
+      <%= label_tag "booking[booking_time]d[late]", "Date" %>
       <%= text_field_tag"booking[booking_time][date]", booking_date(booking), class: "form-control","data-provide" => "datepicker" %>
     </p>
   </div>
@@ -25,8 +25,12 @@
     <p>
       <%= f.label :price %> 
       <%= f.number_field :price, step: 0.25, value: float_two_decimals(booking.price) %>
-    </p>  
+    </p>
   </div>
+
+  <!--  -->
+
   <%= venue_fields(f, booking, venue) %>
-  <p><%= f.submit %></p>
+
+  <p><%= f.submit class:'btn btn-primary'%></p>
 <% end %>
