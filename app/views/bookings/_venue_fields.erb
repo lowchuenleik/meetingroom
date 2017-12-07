@@ -1,17 +1,6 @@
-<% if current_user.venues.any? %>
 <div class="field">
   <p>
     <%= f.label :venue_id %>
     <%= collection_select :booking, :venue_id, current_user.venues, :id, :nickname, {prompt: true } %>
-  </p>
-</div>
-<% end %>
-<p><% if current_user.venues.any? %>Or <% end %>Create a New Venue</p>
-<div class="field">
-  <p>
-    <%= f.fields_for :venue, Venue.new do |venue_atts| %> 
-      <%= venue_atts.label :nickname %>
-      <%= venue_atts.text_field :nickname %>
-    <% end %>
   </p>
 </div>

@@ -10,7 +10,7 @@ class VenuesController < ApplicationController
     @clients = @venue.clients
   end
   
-  def show 
+  def show
     @bookings = @venue.bookings
   end
   
@@ -48,14 +48,11 @@ class VenuesController < ApplicationController
   private 
   
   def set_venue 
-    @venue = current_user.venues.find_by(id: params[:id])
-    if @venue.nil?
-      flash[:error] = "Venue not found."
-      redirect_to venues_path
-    end
+    @venue = Venue.find_by(params[:id])
+
   end
   
   def venue_params
-    params.require(:venue).permit(:nickname, :street_address, :city, :state, :zipcode, :business_name)
+    params.require(:venue).permit(:nickname, :street_address, :city, :state, :zipcode, :business_name, )
   end
 end

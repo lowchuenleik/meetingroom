@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :bookings
   resources :photos
   get 'users/:username', to: "users#show", as: 'user'
+  get '/venues/:id', to:'venues#show', as: 'venue'
 
   resources :venues do
     resources :bookings, only: [:index, :show, :new]

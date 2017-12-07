@@ -74,7 +74,6 @@ class Booking < ActiveRecord::Base
     validates :duration, presence: true, numericality: { greater_than_or_equal_to: 0 }
     validates :booking_time, presence: { message: "must be a valid date" }
     validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true 
-    validates :client_id, presence: true
     
     validate :time_still_valid
     

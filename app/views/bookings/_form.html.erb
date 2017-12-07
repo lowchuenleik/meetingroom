@@ -1,6 +1,5 @@
 <%= render partial: "layouts/errors", locals: { object: booking } %>
 <%= form_with(model: booking, local: true) do |f| %>
-  <%= client_fields(f, booking, client) %>
   <div class="field">
     <p>
       <%= label_tag "booking[booking_time]d[late]", "Date" %>
@@ -21,12 +20,7 @@
       <%= duration_minute_field("booking[duration][min]", booking) %>
     </p>
   </div>
-  <div class="field">
-    <p>
-      <%= f.label :price %> 
-      <%= f.number_field :price, step: 0.25, value: float_two_decimals(booking.price) %>
-    </p>
-  </div>
+
 
   <!--  -->
 

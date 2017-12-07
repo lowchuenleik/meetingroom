@@ -7,43 +7,11 @@
 	    <a href="#" class="btn btn-primary">Go somewhere</a>
 	  </div>
 	</div>
-	<h1 class="my-4 text-center text-lg-left">Thumbnail Gallery</h1>
-
-	<canvas
-		id = "myChart"
-        width="400" height="200">
-      </canvas>
-
-      <script>
-	var ctx = document.getElementById("myChart");
-	var myChart = new Chart(ctx, {
-	    type: 'bar',
-	    data: {
-	        labels: ["day 1", "day 2", "day 3", "day 4", "day 5", "day 6"],
-	        datasets: [{
-	            label: 'My Weight',
-	            data: [82.4, 79.6, 79.3, 78.4, 77.5, 75.1],
-	            backgroundColor: [
-	                'rgba(0, 0, 0, 0.1)',
-	            ],
-	            borderColor: [
-	                'rgba(0,0,0,0.9)',
-	            ],
-	            borderWidth: 1
-	        }]
-	    },
-	    options: {
-	        scales: {
-	            yAxes: [{
-	                ticks: {
-	                    beginAtZero:false
-	                }
-	            }]
-	        }
-	    }
-	});
-	</script>
-
-
+	<h1 class="my-4 text-center text-lg-left">Test cal</h1>
+	<br>
+	
+	<%= calendar number_of_days: 4 do |date| %>
+	  <%= date %>
+	<% end %>
 	</div>
 </div>

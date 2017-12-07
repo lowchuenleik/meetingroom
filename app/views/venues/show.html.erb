@@ -1,8 +1,3 @@
-<h1>Venue</h1>
-<%= render @venue %>
-<h1>Bookings <%= link_to "+ New", new_venue_booking_path(@venue) %></h1>
-<%= render @bookings, template: "bookings/booking" %>
-
 <div id="mycarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -22,7 +17,7 @@
         </div>
     </div>
     <div class="carousel-item">
-        <%= image_tag @venue.image %>
+    <img class="d-block img-fluid" src="https://unsplash.it/2000/1250?image=675" data-color="violet" alt="Third Image">
         <div class="carousel-caption">
             <h3>Second Image</h3>
         </div>
@@ -68,10 +63,12 @@
 			<p class="card-text">£<%= @venue.price %></p>
 		</div>
 		<div class="col-md-4">
-			<% if user_signed_in? %>
-				<p> PUT BOOK NOW </p>
-			<% end %>
 			<div class="card card-block">
+        <% if user_signed_in? %>
+          <h1>Bookings <%= link_to "+", new_venue_booking_path(@venue) %></h1>
+          <%= render @bookings, template: "bookings/booking" %>
+          <%= render @venue %>
+        <% end %>
 				<%= link_to 'Edit', edit_venue_path(@venue) %>
 				<%= link_to 'Back', venues_path %>
 			</div>
