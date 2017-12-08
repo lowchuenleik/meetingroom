@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'jquery-rails'
-gem 'bootstrap', '4.0.0.alpha6'
+gem 'bootstrap', '4.0.0.beta2'
 gem 'activeadmin','~>1.0.0.pre4'
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower'
 
