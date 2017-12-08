@@ -5,7 +5,7 @@ $item.height($wHeight);
 $item.addClass('full-screen');
 
 document.addEventListener("turbolinks:load", function() {
-    console.log('It works on each visit!');
+  console.log('It works on each visit!');
 
   $('.carousel img').each(function() {
     var $src = $(this).attr('src');
