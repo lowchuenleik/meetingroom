@@ -13,7 +13,6 @@
 //= require jquery
 //= require application_theme
 //= require rails-ujs
-//= require_tree .
 //= require turbolinks
 //= require tether.min
 //= require popper.min
@@ -21,3 +20,4 @@
 //= require tablesorter.min
 //= require toolkit
 //= require bootstrap-sprockets
+//= require_tree .
