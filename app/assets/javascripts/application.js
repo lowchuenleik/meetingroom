@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require application_theme
 //= require rails-ujs
-//= require turbolinks
 //= require tether.min
 //= require popper.min
 //= require chart
