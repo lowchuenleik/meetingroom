@@ -19,6 +19,8 @@
 //= require popper.min
 //= require chart
 //= require tablesorter.min
+//= require moment
+//= require fullcalendar
 //= require toolkit
 //= require bootstrap-sprockets
 //= require_tree .

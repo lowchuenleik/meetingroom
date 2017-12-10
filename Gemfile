@@ -67,3 +67,5 @@ gem 'bootstrap-datepicker-rails'
 gem "paperclip", "~> 5.0.0"
 gem "simple_calendar", "~> 2.0"
  
+gem 'momentjs-rails'
+gem 'fullcalendar.io-rails'
