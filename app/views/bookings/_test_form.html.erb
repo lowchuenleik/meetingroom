@@ -1,25 +1,22 @@
 <%= form_with(model: booking, local: true, remote: true) do |f| %>
-  <div class="field">
+  <div class="form-group">
     <p>
       <%= label_tag "booking[booking_time]d[late]", "Date" %>
       <%= text_field_tag"booking[booking_time][date]", booking_date(booking), class: "form-control","data-provide" => "datepicker" %>
     </p>
-  </div>
-  <div class="field">
     <p id="time">
       <%= label_tag "booking[booking_time][hour]", "Time" %>
       <%= hour_selector("booking[booking_time][hour]", booking) %> : 
       <%= min_selector("booking[booking_time][min]", booking) %> 
     </p>
-  </div>
-  <div class="field">
-    <p>
-      <%= f.label :duration %> 
-      <%= duration_hour_field("booking[duration][hour]", booking) %>
-      <%= duration_minute_field("booking[duration][min]", booking) %>
-    </p>
-  </div> 
+    <%= f.label :duration %> 
+    <%= duration_hour_field("booking[duration][hour]", booking) %>
+    <%= duration_minute_field("booking[duration][min]", booking) %>
 
+  <%= f.label :date_range, input_html: { class: "form-control input-sm date-range-picker" }%>
+  <%= f.text_field( :start, as: :hidden, value: Date.today, class: 'form-control input-sm start_hidden' ) %>
+  <%= f.text_field( :end, as: :hidden, value: Date.today, class: 'form-control input-sm end_hidden' ) %>
+  <%= f.label :color, as: :select, collection: [['Black','black'], ['Green','green'], ['Red','red']] %>
   <%= venue_fields(f, booking, venue) %>
 
   <p><%= f.submit class:'btn btn-primary'%></p>
