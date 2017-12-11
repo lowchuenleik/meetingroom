@@ -1,5 +1,4 @@
-<%= render partial: "layouts/errors", locals: { object: booking } %>
-<%= form_with(model: booking, local: true) do |f| %>
+<%= form_with(model: booking, local: true, remote: true) do |f| %>
   <div class="field">
     <p>
       <%= label_tag "booking[booking_time]d[late]", "Date" %>
