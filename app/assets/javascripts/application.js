@@ -18,7 +18,7 @@
 //= require tether.min
 //= require popper.min
 //= require chart
-//= require tablesorter.min
+//= require carousel
 //= require moment
 //= require fullcalendar
 //= require toolkit
