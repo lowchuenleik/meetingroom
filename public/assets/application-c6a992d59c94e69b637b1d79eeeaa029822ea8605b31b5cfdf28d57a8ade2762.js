@@ -11567,7 +11567,6 @@ var App = {
   _isWithTooltips: false,
 
   init: function () {
-    App._tableSorters()
     App._tooltips()
     App._navDoc()
 
@@ -11682,10 +11681,6 @@ var App = {
       $('[data-toggle="tooltip"]').tooltip('destroy')
     }
 
-  },
-
-  _tableSorters: function () {
-    $('[data-sort="table"]').tablesorter( {sortList: [[1,0]]} )
   }
 }
 
@@ -24222,76 +24217,43 @@ module.exports = function(Chart) {
 
 },{"1":1}]},{},[7])(7)
 });
-var $item = $('.carousel .item'); 
-var $wHeight = $(window).height();
-$item.eq(0).addClass('active');
-$item.height($wHeight); 
-$item.addClass('full-screen');
+function loadCarousel(){
+  var $item = $('.carousel .item'); 
+  var $wHeight = $(window).height();
+  $item.eq(0).addClass('active');
+  $item.height($wHeight); 
+  $item.addClass('full-screen');
 
-document.addEventListener("turbolinks:load", function() {
-  console.log('It works on each visit!');
+  document.addEventListener("turbolinks:load", function() {
+    console.log('It works on each visit!');
 
-  $('.carousel img').each(function() {
-    var $src = $(this).attr('src');
-    var $color = $(this).attr('data-color');
-    $(this).parent().css({
-      'background-image' : 'url(' + $src + ')',
-      'background-color' : $color
+    $('.carousel img').each(function() {
+      var $src = $(this).attr('src');
+      var $color = $(this).attr('data-color');
+      $(this).parent().css({
+        'background-image' : 'url(' + $src + ')',
+        'background-color' : $color
+      });
+      $(this).remove();
     });
-    $(this).remove();
+
+    $(window).on('resize', function (){
+      $wHeight = $(window).height();
+      $item.height($wHeight);
+    });
+
+    $('.carousel').carousel({
+      interval: 6000,
+      pause: "false"
+    });
   });
 
-  $(window).on('resize', function (){
-    $wHeight = $(window).height();
-    $item.height($wHeight);
-  });
 
-  $('.carousel').carousel({
-    interval: 6000,
-    pause: "false"
-  });
-});
 
-$(document).ready(function() {
+}
 
-    // page is now ready, initialize the calendar...
 
-    $('#calendar').fullCalendar({
-        events: '/hackyjson/cal/',
-        defaultView: 'basicWeek',
-        header: {
-            left: 'today',
-            center: 'prev title next',
-            right: 'month,basicWeek,agendaDay'
-        },
-        selectable :true,
-        selectHelper: true,
-        editable: true,
-        eventLimit: true,
-        events:[{
-          title: 'All Day Event',
-          start: '2017-12-11'
-        }],
-        select: function(start, end) {
-        $.getScript('/bookings/new', function() {
-          $('#event_date_range').val(moment(start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(end).format("MM/DD/YYYY HH:mm"))
-          date_range_picker();
-          $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'));
-          $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
-          
-        });
-
-        calendar.fullCalendar('unselect');
-        },
-        eventClick:  function(event, jsEvent, view) {
-            $('#modalTitle').html(event.title);
-            $('#modalBody').html(event.description);
-            $('#eventUrl').attr('href',event.url);
-            $('#fullCalModal').modal();
-        }
-    })
-
-});
+window.loadCarousel();
 //! moment.js
 //! version : 2.17.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -65110,6 +65072,46 @@ return $.ui.tabs;
   App.cable = ActionCable.createConsumer();
 
 }).call(this);
+var initialize_calendar;
+initialize_calendar = function () {
+
+      $('#calendar').each(function(){ 
+
+        var calendar = $(this);
+        calendar.fullCalendar({
+          defaultView: 'basicWeek',
+          header: {
+              left: 'today',
+              center: 'prev title next',
+              right: 'month,basicWeek,agendaDay'
+          },
+          selectable :true,
+          selectHelper: true,
+          editable: true,
+          eventLimit: true,
+          events:'/bookings.json',
+          select: function(start, end) {
+          $.getScript('/bookings/new', function() {
+            $('#event_date_range').val(moment(start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(end).format("MM/DD/YYYY HH:mm"))
+            date_range_picker();
+            $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'));
+            $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
+            
+          });
+
+          calendar.fullCalendar('unselect');
+          },
+          eventClick:  function(event, jsEvent, view) {
+              $('#modalTitle').html(event.title);
+              $('#modalBody').html(event.description);
+              $('#eventUrl').attr('href',event.url);
+              $('#fullCalModal').modal();
+          }
+        });
+      })
+  };
+
+$(document).on('turbolinks:load', initialize_calendar);
 var date_range_picker;
 date_range_picker = function() {
   $('.date-range-picker').each(function(){

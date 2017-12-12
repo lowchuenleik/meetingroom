@@ -10592,9 +10592,10 @@ a.text-dark:focus, a.text-dark:hover {
   background-position: center center;
   background-size: cover;
   height: 900px;
+  margin-top: -30px;
 }
 
-/* line 14, C:/hang/app/assets/stylesheets/pages.scss */
+/* line 15, C:/hang/app/assets/stylesheets/pages.scss */
 .navbar-brand {
   max-height: 40px;
   overflow: visible;
@@ -10602,37 +10603,37 @@ a.text-dark:focus, a.text-dark:hover {
   padding-bottom: 0;
 }
 
-/* line 23, C:/hang/app/assets/stylesheets/pages.scss */
+/* line 24, C:/hang/app/assets/stylesheets/pages.scss */
 .full-screen {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
 
-/* line 29, C:/hang/app/assets/stylesheets/pages.scss */
+/* line 30, C:/hang/app/assets/stylesheets/pages.scss */
 #logo1 {
   max-height: 30px;
 }
 
-/* line 33, C:/hang/app/assets/stylesheets/pages.scss */
+/* line 34, C:/hang/app/assets/stylesheets/pages.scss */
 h1#landing {
   font-size: 60px;
   margin-bottom: 2em;
   margin-top: 1em;
 }
 
-/* line 40, C:/hang/app/assets/stylesheets/pages.scss */
+/* line 41, C:/hang/app/assets/stylesheets/pages.scss */
 .carousel-item {
   height: 600px;
   min-height: 300px;
 }
 
-/* line 46, C:/hang/app/assets/stylesheets/pages.scss */
+/* line 47, C:/hang/app/assets/stylesheets/pages.scss */
 h1#venue {
   font-size: 80px;
 }
 
-/* line 51, C:/hang/app/assets/stylesheets/pages.scss */
+/* line 52, C:/hang/app/assets/stylesheets/pages.scss */
 .item img {
   position: absolute;
   top: 0;
@@ -10640,12 +10641,12 @@ h1#venue {
   min-height: 300px;
 }
 
-/* line 58, C:/hang/app/assets/stylesheets/pages.scss */
+/* line 59, C:/hang/app/assets/stylesheets/pages.scss */
 .portfolio-item {
   margin-bottom: 30px;
 }
 
-/* line 62, C:/hang/app/assets/stylesheets/pages.scss */
+/* line 63, C:/hang/app/assets/stylesheets/pages.scss */
 .navbar {
   margin-bottom: 30px;
 }
