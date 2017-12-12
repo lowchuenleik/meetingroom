@@ -118,10 +118,6 @@ var App = {
       $('[data-toggle="tooltip"]').tooltip('destroy')
     }
 
-  },
-
-  _tableSorters: function () {
-    $('[data-sort="table"]').tablesorter( {sortList: [[1,0]]} )
   }
 }
 
