@@ -3,7 +3,6 @@ var App = {
   _isWithTooltips: false,
 
   init: function () {
-    App._tableSorters()
     App._tooltips()
     App._navDoc()
 

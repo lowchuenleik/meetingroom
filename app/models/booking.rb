@@ -1,11 +1,13 @@
 class Booking < ActiveRecord::Base
-    belongs_to :venue
+    belongs_to :venue, optional: true
     belongs_to :user
-    belongs_to :client
+    belongs_to :client, optional: true
     
     accepts_nested_attributes_for :client
     accepts_nested_attributes_for :venue
     
+
+
     def start_time
         self.booking_time
     end
@@ -14,8 +16,9 @@ class Booking < ActiveRecord::Base
         booking_time + duration.seconds
     end
     
-    def client_name 
-        client.name
+    def client_name
+        #client.name
+        user.id
     end
     
     def venue_name 

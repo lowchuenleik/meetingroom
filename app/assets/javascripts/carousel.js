@@ -1,4 +1,4 @@
-  var window.loadCarousel = function loadCarousel(){
+function loadCarousel(){
   var $item = $('.carousel .item'); 
   var $wHeight = $(window).height();
   $item.eq(0).addClass('active');
@@ -45,10 +45,7 @@
           selectHelper: true,
           editable: true,
           eventLimit: true,
-          events:[{
-            title: 'All Day Event',
-            start: '2017-12-11'
-          }],
+          events:'/bookings.json',
           select: function(start, end) {
           $.getScript('/bookings/new', function() {
             $('#event_date_range').val(moment(start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(end).format("MM/DD/YYYY HH:mm"))
@@ -73,4 +70,4 @@
 }
 
 
-loadCarousel();
+window.loadCarousel();
