@@ -1,2 +1,8 @@
-<h1>Edit Venue</h1>
-<%= render partial: "form", locals: { venue: @venue } %>
+<div class='container'>
+	<h1>Editing Venue</h1>
+
+	<%= render 'form', venue: @venue %>
+
+	<%= link_to 'Show', @venue %> |
+	<%= link_to 'Back', venues_path %>
+</div>

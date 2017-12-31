@@ -1,0 +1,41 @@
+<div class='container'>
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @reservation.name %>
+  </p>
+
+  <p>
+    <strong>Price:</strong>
+    <%= @reservation.price %>
+  </p>
+
+  <p>
+    <strong>Date:</strong>
+    <%= @reservation.date %>
+  </p>
+
+  <p>
+    <strong>End:</strong>
+    <%= @reservation.end %>
+  </p>
+
+  <p>
+    <strong>Start:</strong>
+    <%= @reservation.start %>
+  </p>
+
+  <p>
+    <strong>User:</strong>
+    <%= @reservation.user_id %>
+  </p>
+
+  <p>
+    <strong>Venue:</strong>
+    <%= @reservation.venue_id %>
+  </p>
+
+  <%= link_to 'Edit', edit_reservation_path(@reservation) %> |
+  <%= link_to 'Back', reservations_path %>
+</div>

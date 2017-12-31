@@ -3,7 +3,17 @@
 one:
   name: MyString
   price: 1
+  byline: MyString
+  host: MyString
+  capacity: 1
+  street_address: MyString
+  postcode: MyString
 
 two:
   name: MyString
   price: 1
+  byline: MyString
+  host: MyString
+  capacity: 1
+  street_address: MyString
+  postcode: MyString

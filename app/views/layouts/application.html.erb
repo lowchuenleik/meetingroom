@@ -7,18 +7,21 @@
     <% end %>
      -->
     <title>Hang - Meetings Sorted</title>
+    <%= Gon::Base.render_data %>
+
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
+    
+
   </head>
 
-  <body data-spy="scroll" data-offset="0">
 
     <!-- Navigation Bar -->
     <div class="row-fluid">
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar" style="margin-bottom:40px">
         <div class="container">
           <div class="navbar-header">
             <%= link_to image_tag("hang-white.png", alt:"logo", id: "logo1") , root_path, class: "navbar-brand" %>

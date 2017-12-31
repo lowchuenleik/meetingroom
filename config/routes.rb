@@ -1,16 +1,19 @@
 Rails.application.routes.draw do
+  resources :venues do
+    resources :reservations
+  end
+  
+  resources :events
   resources :bookings
   resources :photos
   get 'users/:username', to: "users#show", as: 'user'
-  get '/venues/:id', to:'venues#show', as: 'venue'
 
-  resources :venues do
-    resources :bookings, only: [:index, :show, :new]
-  end
-  
+
   resources :clients do 
     resources :bookings, only: [:index, :show, :new]
   end
+
+
   resources :tweets #Always seven
   devise_for :users
   as :user do
@@ -18,6 +21,7 @@ Rails.application.routes.draw do
   	delete "signout", to: 'devise/sessions#destroy'
   	get "signup", to:'devise/registrations#new'
   end
+
   root "pages#home"
   get 'adminv', to:'admins#admin'
   get 'about', to: 'pages#about'

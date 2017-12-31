@@ -12,7 +12,7 @@ ActiveAdmin.register Venue do
 #   permitted
 # end
 
-	permit_params :name, :price, :byline, :capacity
+	permit_params :name, :price, :byline, :host, :capacity, :street_address,:postcode,:images, images: []
 
 	form do |f|
 		f.semantic_errors
@@ -20,19 +20,25 @@ ActiveAdmin.register Venue do
 			f.input :name
 			f.input :price
 			f.input :byline
+			f.input :host
 			f.input :capacity
+			f.input :street_address
+			f.input :postcode
+			f.input :images
 		end
 		f.actions
 	end
-
 	index do
+		selectable_column
 		id_column
 		column :name
 		column :price
 		column :byline
+		column :host
 		column :capacity
+		column :street_address
+		column :postcode
+		column :images
 		actions
 	end
-
-
 end

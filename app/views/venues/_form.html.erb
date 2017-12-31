@@ -1,28 +1,30 @@
-<%= render partial: "layouts/errors", locals: { object: venue } %>
-<%= form_for venue do |f| %> 
-  <p>
-    <%= f.label :nickname %>
-    <%= f.text_field :nickname %>
-  </p>
-  <p>
-    <%= f.label :street_address %>
-    <%= f.text_field :street_address %>
-  </p>
-  <p>
-    <%= f.label :city %>
-    <%= f.text_field :city %>
-  </p>
-  <p>
-    <%= f.label :state %> 
-    <%= f.text_field :state %> 
-  </p>
-  <p>
-    <%= f.label :zipcode %> 
-    <%= f.text_field :zipcode %>
-  </p>
-  <p>
-    <%= f.label :business_name %> 
-    <%= f.text_field :business_name %>
-  </p>
-  <p><%= f.submit %></p>
+<%= simple_form_for @venue do |f| %>
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :price %>
+    <%= f.input :byline %>
+    <%= f.input :host %>
+    <%= f.input :capacity %>
+    <%= f.input :street_address %>
+    <%= f.input :postcode %>
+    <%= f.input :images, multiple: true, input_html: { name: 'venue[images][]', value: @venue.images[0] } %>
+    <%= f.input :images, multiple: true, input_html: { name: 'venue[images][]', value: @venue.images[1] } %>
+    <%= f.input :images, multiple: true, input_html: { name: 'venue[images][]', value: @venue.images[2] } %>
+    <%= f.input :images, multiple: true, input_html: { name: 'venue[images][]', value: @venue.images[3] } %>
+    <%= f.input :images, multiple: true, input_html: { name: 'venue[images][]', value: @venue.images[4] } %>
+    <%= f.input :images, multiple: true, input_html: { name: 'venue[images][]', value: @venue.images[5] } %>
+    <%= f.simple_fields_for :images do |x| %>
+    <% end %> 
+  </div>
+  <% @venue.images.each do |x| %>
+    <%= x %>
+  <% end %>
+  <div class="form-actions">
+    <%= f.button :submit %>
+    <%= link_to 'Delete', 
+                venue, 
+                method: :delete, 
+                class: 'btn btn-danger', 
+                data: { confirm: 'Are you sure?' } %>
+  </div>
 <% end %>

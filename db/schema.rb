@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123164433) do
+ActiveRecord::Schema.define(version: 20171227192103) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -33,10 +33,11 @@ ActiveRecord::Schema.define(version: 20171123164433) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.float "price"
-    t.integer "duration"
     t.integer "client_id"
     t.datetime "booking_time"
     t.integer "venue_id", limit: 4
+    t.datetime "start"
+    t.datetime "end"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
@@ -48,10 +49,32 @@ ActiveRecord::Schema.define(version: 20171123164433) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "photos", force: :cascade do |t|
     t.text "image_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.string "name"
+    t.float "price"
+    t.string "date"
+    t.datetime "end"
+    t.datetime "start"
+    t.integer "user_id"
+    t.integer "venue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "color"
   end
 
   create_table "tweets", force: :cascade do |t|
@@ -78,6 +101,7 @@ ActiveRecord::Schema.define(version: 20171123164433) do
     t.boolean "admin", default: false
     t.string "username"
     t.string "name"
+    t.boolean "host"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -86,21 +110,14 @@ ActiveRecord::Schema.define(version: 20171123164433) do
   create_table "venues", force: :cascade do |t|
     t.string "name"
     t.integer "price"
+    t.string "byline"
+    t.string "host"
+    t.integer "capacity"
+    t.string "street_address"
+    t.string "postcode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "byline"
-    t.integer "capacity"
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
-    t.integer "user_id", limit: 4
-    t.string "business_name", limit: 255
-    t.string "zipcode", limit: 255
-    t.string "state", limit: 255
-    t.string "street_address", limit: 255
-    t.string "city", limit: 255
-    t.string "nickname", limit: 255
+    t.text "images"
   end
 
 end

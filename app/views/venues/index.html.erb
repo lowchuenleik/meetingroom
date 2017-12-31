@@ -43,7 +43,7 @@
           <div class="col-md-4">
             <div class="card" id="Venue" style="margin-bottom: 1em">
               <img class="card-img-top" src="http://placehold.it/350x250" alt="Card image cap">
-              <div class="card-block">
+              <div class="card-body">
                 <h2 class="float-right">£<%= venue.price %></h2>
                 <h4 class="card-title"><%= link_to venue.name , venue_path(venue), style:"color:black" %></h4>
                 <p class="font-italic lead card-text"><%= venue.byline%></p>
@@ -63,27 +63,4 @@
 
 
   <%= link_to 'New Venue', new_venue_path %>
-</div>
-
-<h1>Venues <%= link_to "+ New", new_venue_path %></h1>
-<% if @venues.any? %>
-<div class="row">
-  <div class="col-sm-3 hidden-xs">
-    <h3>Nickname</h3>
-  </div>
-  <div class="col-sm-3 hidden-xs">
-    <h3>Address</h3>
-  </div>
-  <div class="col-sm-3 hidden-xs">
-    <h3>Clients</h3>
-  </div>
-  <div class="col-sm-3 hidden-xs">
-    <h3>Bookings</h3>
-  </div>
-</div>
-<% else %> 
-<p>No venues yet.</p>
-<% end %>
-<div class="venues">
-  <%= render partial: "venue_index", collection: @venues, as: :venue %>  
 </div>

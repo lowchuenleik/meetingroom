@@ -17,7 +17,7 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create venue" do
     assert_difference('Venue.count') do
-      post venues_url, params: { venue: { name: @venue.name, price: @venue.price } }
+      post venues_url, params: { venue: { byline: @venue.byline, capacity: @venue.capacity, host: @venue.host, name: @venue.name, postcode: @venue.postcode, price: @venue.price, street_address: @venue.street_address } }
     end
 
     assert_redirected_to venue_url(Venue.last)
@@ -34,7 +34,7 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update venue" do
-    patch venue_url(@venue), params: { venue: { name: @venue.name, price: @venue.price } }
+    patch venue_url(@venue), params: { venue: { byline: @venue.byline, capacity: @venue.capacity, host: @venue.host, name: @venue.name, postcode: @venue.postcode, price: @venue.price, street_address: @venue.street_address } }
     assert_redirected_to venue_url(@venue)
   end
 

@@ -32,7 +32,6 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'jquery-rails'
 gem 'bootstrap', '4.0.0.beta2'
 gem 'activeadmin','~>1.0.0.pre4'
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower'
@@ -60,12 +59,14 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'jquery-rails'
+gem 'popper_js', '~> 1.12.9'
 gem 'shrine'
 gem 'aws-sdk-s3'
 gem "font-awesome-rails"
 gem 'bootstrap-datepicker-rails'
 gem "paperclip", "~> 5.0.0"
 gem "simple_calendar", "~> 2.0"
- 
+gem 'simple_form'
 gem 'momentjs-rails'
 gem 'fullcalendar.io-rails'

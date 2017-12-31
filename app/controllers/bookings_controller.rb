@@ -3,7 +3,6 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
   before_action :set_bookings, only: [:index, :show, :edit]
   before_action :set_client, only: [:index, :new, :edit]
-  before_action :set_venue, only: [:index, :new, :edit]
     
   def index 
     @upcoming_bookings = current_user.upcoming_bookings
@@ -52,9 +51,7 @@ class BookingsController < ApplicationController
     @client = current_user.clients.find_by(id: params[:client_id])
   end
   
-  def set_venue
-    @venue = current_user.venues.find_by(id: params[:venue_id])
-  end
+
   
   def set_booking
     @booking = current_user.bookings.find_by(id: params[:id])
@@ -69,7 +66,7 @@ class BookingsController < ApplicationController
   end
   
   def booking_params
-    params.require(:booking).permit(:client_id, :price, :venue_id, venue_attributes: [:nickname], client_attributes: [:name], booking_time: [:date, :hour, :min], duration: [:hour, :min])
+    params.require(:booking).permit(:client_id, :start, :end, :price, :venue_id, venue_attributes: [:nickname], client_attributes: [:name], booking_time: [:date, :hour, :min])
   end
   
 end

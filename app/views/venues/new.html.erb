@@ -1,2 +1,15 @@
-<h1>New Venue</h1>
-<%= render partial: "form", locals: { venue: @venue } %>
+<div class='container'>
+
+  <div class="row">
+    <div class="col-md-8">
+    	 
+    </div>
+    <div class="col-md-4">
+		<h1>New Venue</h1>
+
+		<%= render 'form', venue: @venue %>
+
+		<%= link_to 'Back', venues_path %>
+    </div>
+  </div>
+</div>

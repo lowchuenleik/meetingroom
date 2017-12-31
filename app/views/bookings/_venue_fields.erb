@@ -1,6 +1,6 @@
 <div class="field">
   <p>
     <%= f.label :venue_id %>
-    <%= collection_select :booking, :venue_id, current_user.venues, :id, :nickname, {prompt: true } %>
+    <%= collection_select :booking, :venue_id, Venue.all , :id, :name, {prompt: true } %>
   </p>
 </div>
