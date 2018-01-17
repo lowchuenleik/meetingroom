@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227192103) do
+ActiveRecord::Schema.define(version: 20180114004653) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -58,6 +58,18 @@ ActiveRecord::Schema.define(version: 20171227192103) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "merchants", force: :cascade do |t|
+    t.string "uid"
+    t.string "provider"
+    t.string "access_code"
+    t.string "publishable_key"
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
   create_table "photos", force: :cascade do |t|
     t.text "image_data"
     t.datetime "created_at", null: false
@@ -75,6 +87,17 @@ ActiveRecord::Schema.define(version: 20171227192103) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "color"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "merchant_id"
+    t.integer "venue_id"
+    t.decimal "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "paid", default: false
+    t.string "stripe_charge"
   end
 
   create_table "tweets", force: :cascade do |t|
@@ -102,6 +125,12 @@ ActiveRecord::Schema.define(version: 20171227192103) do
     t.string "username"
     t.string "name"
     t.boolean "host"
+    t.string "uid"
+    t.string "provider"
+    t.string "access_code"
+    t.string "publishable_key"
+    t.string "stripe_customer_id"
+    t.string "stripe_temporary_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -118,6 +147,7 @@ ActiveRecord::Schema.define(version: 20171227192103) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "images"
+    t.string "merchant_id"
   end
 
 end

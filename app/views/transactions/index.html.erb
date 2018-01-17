@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <div class="card card-default">
+    <div class="row">
+      <div class="col-lg-2">
+        ID
+      </div>
+      <div class="col-lg-2">
+        Title and Description
+      </div>
+      <div class="col-lg-1">
+        Total
+      </div>
+      <div class="col-lg-1">
+        Link
+      </div>
+      <div class="col-lg-1">
+        Processed on Stripe?
+      </div>
+      <div class="col-lg-3">
+        Stripe Charge ID
+      </div>
+    </div>
+  </div>
+  <% @transactions.each do |transaction| %>
+    <div class="row">
+      <div class="col-lg-2">
+        <%= "Transaction ID: #{transaction.id}" %>
+      </div>
+      <div class="col-lg-2">
+        <%= transaction.merchant.title %>
+        <%= transaction.merchant.description %>
+      </div>
+      <div class="col-lg-1">
+        <%= number_to_currency(transaction.total) %>
+      </div>
+      <div class="col-lg-1">
+        <%= link_to 'Show', transaction %>
+      </div>
+      <div class="col-lg-1">
+        <%= transaction.paid %>
+      </div>
+      <div class="col-lg-3">
+        <%= transaction.stripe_charge %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,76 @@
+<div class='container'>
+  <p id="notice"><%= notice %></p>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="container text-center">
+      <h1>Hosts</h1>
+    </div>
+    <br>
+    <% if @user.is_seller? %>
+      <% unless @user.can_receive_payments? %>
+        <div class="card card-default">
+          <div class="card-header text-center">
+            <h4>
+              You wont be able to sell items until you register with Stripe!
+            </h4>
+          </div>
+          <div class="card-body text-center">
+            <%= link_to 'Connect', stripe_url, class: 'btn btn-lg btn-info', target: '_blank'%> 
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class='card-deck'>
+      <% @merchants.each do |merchant| %>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+          <div class="card text-center">
+            <div class="card-header">
+              <h3>
+                <%= merchant.title %>
+              </h3>
+              <p>
+                <%= merchant.description %>
+              </p>
+            </div>
+            <div class="card-body">
+              <% if current_user == merchant.owner %>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type='button' class="btn btn-md btn-info">
+                      <%= link_to 'Show', merchant %>
+                    </button>
+                    <button type='button' class="btn btn-md btn-info">
+                      <%= link_to 'Edit', edit_merchant_path(merchant) %>
+                    </button>
+                    <button type='button' class="btn btn-md btn-info">
+                      <%= link_to 'Destroy', merchant, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    </button>
+                </div>
+              <% else %>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <button type='button' class="btn btn-md btn-link">
+                      <%= link_to 'Show', merchant %>
+                    </button>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+      <div class="card card-default"></div>
+      <div class="btn btn-md btn-info">
+        <%= link_to 'New Merchant', new_user_merchant_path(@user) %>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <%= render 'billing', merchant: @merchant, user: @user %>
+
+
+</div>

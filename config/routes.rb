@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
+  resources :transactions
+  resources :merchants
   resources :venues do
-    resources :reservations
+    resources :reservations do
+      get 'confirmation', on: :collection
+      member do
+        get 'save_session'
+      end
+    end
   end
   
   resources :events
@@ -15,7 +22,20 @@ Rails.application.routes.draw do
 
 
   resources :tweets #Always seven
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'omniauth_callbacks'
+  }
+  
+  resources :merchants do
+    resources :venues
+    resources :transactions
+  end
+
+  resources :users do
+    resources :merchants
+    resources :transactions
+  end
+
   as :user do
   	get "signin", to: 'devise/sessions#new'
   	delete "signout", to: 'devise/sessions#destroy'

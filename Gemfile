@@ -36,7 +36,6 @@ gem 'bootstrap', '4.0.0.beta2'
 gem 'activeadmin','~>1.0.0.pre4'
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower'
 
-gem 'dotenv-rails', require: 'dotenv/rails-now'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -59,6 +58,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'dotenv-rails', require: 'dotenv/rails-now', groups: [:development, :test]
 gem 'jquery-rails'
 gem 'popper_js', '~> 1.12.9'
 gem 'shrine'
@@ -70,3 +70,7 @@ gem "simple_calendar", "~> 2.0"
 gem 'simple_form'
 gem 'momentjs-rails'
 gem 'fullcalendar.io-rails'
+gem 'gon'
+gem 'omniauth-stripe-connect'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'certified'

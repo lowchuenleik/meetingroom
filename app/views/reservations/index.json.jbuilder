@@ -5,6 +5,6 @@ json.array! @reservations do |reservation|
   json.start reservation.start.strftime(date_format)
   json.end reservation.end.strftime(date_format)
   json.allDay reservation.all_day_reservation? ? true : false
-  json.update_url reservation_path(reservation, method: :patch)
-  json.edit_url edit_reservation_path(reservation)
+  json.update_url venue_reservation_path(@venue,reservation, method: :patch)
+  json.edit_url edit_venue_reservation_path(@venue,reservation)
 end

@@ -1,1 +1,6 @@
-<div class='calendar'></div>
+<div class='container'>
+	<div class='calendar'></div>
+	<% @reservations.each do |r| %>
+		<%= r.name %>
+	<% end %>
+</div>

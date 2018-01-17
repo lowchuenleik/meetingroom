@@ -36,6 +36,6 @@
     <%= @reservation.venue_id %>
   </p>
 
-  <%= link_to 'Edit', edit_reservation_path(@reservation) %> |
-  <%= link_to 'Back', reservations_path %>
+  <%= link_to 'Edit', edit_venue_reservation_path(@venue, @reservation) %> |
+  <%= link_to 'Back', venue_reservations_path %>
 </div>

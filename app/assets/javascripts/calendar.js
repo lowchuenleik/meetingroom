@@ -3,6 +3,7 @@ initialize_calendar = function () {
 
       $('.calendar').each(function(){ 
 
+        var venue_fix = '/venues/' + gon.venue_id
         var calendar = $(this);
         calendar.fullCalendar({
           defaultView: 'agendaWeek',
@@ -17,9 +18,9 @@ initialize_calendar = function () {
           editable: true,
           eventLimit: true,
           displayEventTime: true,
-          events:'/venues/<%= venue.id %>/reservations.json',
+          events: venue_fix + '/reservations.json',
           select: function(start, end) {
-            $.getScript('/reservations/new', function() {
+            $.getScript( venue_fix + '/reservations/new', function() {
               $('#reservation_date_range').val(moment(start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(end).format("MM/DD/YYYY HH:mm"))
               date_range_picker();
               $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'));
