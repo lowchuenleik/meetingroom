@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
-  before_action :set_venue
+  before_action :set_venue_and_user
 
   # GET /reservations
   # GET /reservations.json
@@ -29,13 +29,14 @@ class ReservationsController < ApplicationController
   def create
     @reservation = Reservation.new(reservation_params)
     @reservation.venue_id = @venue.id
+    @reservation.user_id = current_user.id
 
     if params[:Preview]
       session[:reservation] = params[:reservation]
       redirect_to confirmation_venue_reservations_path
     else
       respond_to do |format|
-        if @reservation.save # - GOES THROUGH OKAY
+        if @reservation.save! # - GOES THROUGH OKAY
           format.html { redirect_to venue_reservation_url(@venue, @reservation), notice: 'Reservation was successfully created.' }
           format.json { render :show, status: :created, location: @reservation }
         else
@@ -82,7 +83,6 @@ class ReservationsController < ApplicationController
     params[:reservation] = session[:reservation]
     @reservation = Reservation.new(reservation_params)
 
-
     #redirect_to confirmation_venue_reservations_path
 
   end
@@ -93,14 +93,14 @@ class ReservationsController < ApplicationController
       @reservation = Reservation.find(params[:id])
     end
 
-    def set_venue
+    def set_venue_and_user
       @venue = Venue.find(params[:venue_id])
       gon.venue_id = @venue.id
-
+      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:name, :reservation,:title, :price, :date, :end, :start, :user_id, :venue_id,:date_range)
+      params.require(:reservation).permit(:name, :commit, :reservation,:title, :price, :date, :end, :start, :user_id, :venue_id,:date_range)
     end
 end

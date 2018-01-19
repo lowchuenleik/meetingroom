@@ -19,6 +19,12 @@ initialize_calendar = function () {
           eventLimit: true,
           displayEventTime: true,
           events: venue_fix + '/reservations.json',
+
+          select: function(start, end) {
+            $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'))
+            $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
+          }
+          /*
           select: function(start, end) {
             $.getScript( venue_fix + '/reservations/new', function() {
               $('#reservation_date_range').val(moment(start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(end).format("MM/DD/YYYY HH:mm"))
@@ -30,6 +36,8 @@ initialize_calendar = function () {
 
             calendar.fullCalendar('unselect');
           },
+          */
+          /*
           eventDrop: function(event, delta, revertFunc) {
             alert(event.title + " was dropped on " + event.start.format());
             event_data = {  
@@ -55,6 +63,7 @@ initialize_calendar = function () {
               $('.end_hidden').val(moment(event.end).format('YYYY-MM-DD HH:mm'));
             });
           }
+          */
         });
       })
   };
