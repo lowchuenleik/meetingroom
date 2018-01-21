@@ -4,27 +4,33 @@
 <% end %>
 
 	<div class="row">
-	    <div class="col-md-4">
-	    <br>
-	    	<%= image_tag @venue.images[0], class:'img-fluid' %>
-	    </div>
-	    <div class="col-md-8">
-	    <br>
-			<h1><%= @reservation.name %></h1>
-			<h2><%= @venue.name %> </h1>
-			<h2><%= @reservation.start %></h2>
-			<h2><%= @reservation.end %></h2>
-			<br>
+	    <div class="col-sm-8">
+		    <br>
+	    	<%= render 'billing', user: @user %>
+			<div class='calendar'></div>
 
-			<%= link_to 'Back', new_venue_reservation_path, class:'btn btn-primary' %>
+	    </div>
+	    <div class="col-sm-4">
+		    <br>
+	    	<div class='card'>
+		    	<%= image_tag @venue.images[0], class:'card-img-top', alt:'Card image cap' %>
+		    	<div class='card-body'>
+
+					<h2 class='card-title'><%= @reservation.name %></h2>
+					<p class='card-text'><%= @venue.name %> </p>
+					<p class='card-text'><%= @reservation.start %></p>
+					<p class='card-text'><%= @reservation.end %></p>
+					<br>
+
+					<%= link_to 'Back', new_venue_reservation_path, class:'btn btn-primary' %>
+				</div>
+			</div>
 	    </div>
 	</div>
 
-	<%= render 'billing', user: @user %>
-
+	
     <br>
     <br>
 
-	<div class='calendar'></div>
 
 </div>

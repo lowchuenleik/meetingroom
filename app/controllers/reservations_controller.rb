@@ -33,10 +33,10 @@ class ReservationsController < ApplicationController
     @reservation.user_id = current_user.id
 
     if params[:Preview]
+      flash[:alert] = "Please review the final details of your order"
       redirect_to confirmation_venue_reservations_path
-    end
-    
-    if @reservation.valid?
+
+    elsif @reservation.valid?
       token = params[:stripeToken]
 
       # Charge the user's card:
@@ -104,9 +104,9 @@ class ReservationsController < ApplicationController
   def confirmation
     params[:reservation] = session[:reservation]
     @reservation = Reservation.new(reservation_params)
-    respond_to do |format|
-      format.json { render :confirmation, location: @reservation }
-    end
+    #respond_to do |format|
+      #format.json { render :confirmation, location: @reservation }
+    #end
     
 
     #redirect_to confirmation_venue_reservations_path

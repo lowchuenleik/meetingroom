@@ -15,7 +15,8 @@
             </h4>
           </div>
           <div class="card-body text-center">
-            <%= link_to 'Connect', stripe_url, class: 'btn btn-lg btn-info', target: '_blank'%> 
+            <%= link_to 'Connect', stripe_url, class: 'btn btn-lg btn-info', target: '_blank'%>
+            <!-- NOTE; merchants need to connect their Hang account to their Stripe one and we pass their UID on in the Charge ation. [NB; Implement DRY protocol? ] -->
           </div>
         </div>
       <% end %>
