@@ -1,4 +1,4 @@
-<%= simple_form_for [@venue,@reservation], remote: true do |f| %>
+<%= simple_form_for [@venue,@reservation], remote: true, format: :html do |f| %> <!-- add cutom URL and method instead of redirect -->
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :date_range, input_html: { class: "date-range-picker input-md form-control"} %>

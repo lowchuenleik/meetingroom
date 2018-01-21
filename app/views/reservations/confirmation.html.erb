@@ -1,7 +1,6 @@
 <div class='container'>
 
 <% if params[:Preview] %>
-	  <%= textilize @reservation.description %>
 <% end %>
 
 	<div class="row">
@@ -16,27 +15,6 @@
 			<h2><%= @reservation.start %></h2>
 			<h2><%= @reservation.end %></h2>
 			<br>
-
-			<%= simple_form_for [@venue,@reservation], remote: true do |f| %>
-			  <div class="form-inputs">
-			    <%= f.hidden_field :name, value: @reservation.name %>
-			    <%= f.input_field :start, as: :hidden, value: @reservation.start, class: 'start_hidden' %>
-			    <%= f.input_field :end, as: :hidden, value: @reservation.end, class: 'form-control input-md end_hidden' %>
-			  </div>
-
-
-			  <br>
-
-			  <div class="form-actions">
-			    <%= f.button :submit %>
-			    <%= link_to 'Delete', 
-			                venue_reservation_path, 
-			                method: :delete, 
-			                class: 'btn btn-danger', 
-			                data: { confirm: 'Are you sure?' }, 
-			                remote: true unless @reservation.new_record? %>
-			  </div>
-			<% end %>
 
 			<%= link_to 'Back', new_venue_reservation_path, class:'btn btn-primary' %>
 	    </div>

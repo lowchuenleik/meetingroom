@@ -34,7 +34,8 @@ class Reservation < ApplicationRecord
 		  currency: 'gbp',
 		  # the applicant users Stripe Customer ID
 		  # expect format of "cus_0xxXxXXX0XXxX0"
-		  customer: user.stripe_customer_id,
+		  # customer: user.stripe_customer_id,
+		  source: token,
 		  # Description of charge
 		  description: description,
 		  # Final Destination of charge (host standalone account)

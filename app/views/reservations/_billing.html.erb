@@ -1,9 +1,12 @@
 <div class="card-header text-center">
   <h5 id="card-unavailable"></h5>
-  Not a Stripe Customer Yet, Let's Create An Account!
+  Insert card information here!
   <div class="card-body">
-    <%= form_for @user, html: {class:'form-horizontal add-card', id:"payment-form"} do |f| %>
-      <%= f.hidden_field :stripe_temporary_token, id: 'stripe_temporary_token' %>
+    <%= form_for [@venue,@reservation], html: {class:'form-horizontal add-card', id:"payment-form"} do |f| %>
+      <%= f.hidden_field :name, value: @reservation.name %>
+      <%= f.hidden_field :start, as: :hidden, value: @reservation.start, class: 'start_hidden' %>
+      <%= f.hidden_field :end, as: :hidden, value: @reservation.end, class: 'form-control input-md end_hidden' %>
+
       <div class="form-row">
         <label for="card-element">
           Credit or debit card 
@@ -13,7 +16,15 @@
           <!-- a Stripe Element will be inserted here. -->
         </div>
         <div id="card-errors" role="alert"></div>
-      <%= f.submit %>
+      <%= f.submit 'Confirm' %>
+      <div class="form-actions">
+        <%= link_to 'Delete',  
+                    venue_reservation_path, 
+                    method: :delete, 
+                    class: 'btn btn-danger', 
+                    data: { confirm: 'Are you sure?' }, 
+                    remote: true unless @reservation.new_record? %>
+      </div>
     <% end %>
   </div>
 </div>
@@ -27,9 +38,18 @@ $(document).ready(function(){
   // Custom styling can be passed to options when creating an Element.
   var style = {
     base: {
-      // Add your base input styles here. For example:
+      color: '#32325d',
+      lineHeight: '18px',
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: 'antialiased',
       fontSize: '16px',
-      color: "#32325d",
+      '::placeholder': {
+        color: '#aab7c4'
+      }
+    },
+    invalid: {
+      color: '#fa755a',
+      iconColor: '#fa755a'
     }
   };
 

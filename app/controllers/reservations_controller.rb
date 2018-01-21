@@ -27,14 +27,31 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
+    @merchant = @venue.merchant
     @reservation = Reservation.new(reservation_params)
     @reservation.venue_id = @venue.id
     @reservation.user_id = current_user.id
 
     if params[:Preview]
-      session[:reservation] = params[:reservation]
       redirect_to confirmation_venue_reservations_path
-    else
+    end
+    
+    if @reservation.valid?
+      token = params[:stripeToken]
+
+      # Charge the user's card:
+      charge = Stripe::Charge.create(
+        :amount => 1000,
+        :currency => "gbp",
+        :description => "Example charge",
+        :capture => false,
+        :source => token,
+        :destination => {
+          :account => @merchant.user.uid,
+        }
+      )
+
+
       respond_to do |format|
         if @reservation.save! # - GOES THROUGH OKAY
           format.html { redirect_to venue_reservation_url(@venue, @reservation), notice: 'Reservation was successfully created.' }
@@ -44,6 +61,9 @@ class ReservationsController < ApplicationController
           format.json { render json: @reservation.errors, status: :unprocessable_entity }
         end
       end
+    else
+      flash[:error] = 'One or more errors'
+      redirect_to confirmation_venue_reservations_path
     end
   end
 
@@ -74,6 +94,8 @@ class ReservationsController < ApplicationController
   end
 
 
+
+
   def save_session
     session[:reservation] = params[:reservation]
     redirect_to confirmation_path
@@ -82,6 +104,10 @@ class ReservationsController < ApplicationController
   def confirmation
     params[:reservation] = session[:reservation]
     @reservation = Reservation.new(reservation_params)
+    respond_to do |format|
+      format.json { render :confirmation, location: @reservation }
+    end
+    
 
     #redirect_to confirmation_venue_reservations_path
 
@@ -101,6 +127,6 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:name, :commit, :reservation,:title, :price, :date, :end, :start, :user_id, :venue_id,:date_range)
+      params.require(:reservation).permit(:name, :commit, :reservation,:title, :price, :date, :end, :start, :user_id, :venue_id,:merchant_id,:date_range)
     end
 end
