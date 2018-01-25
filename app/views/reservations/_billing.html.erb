@@ -1,23 +1,26 @@
-<div class="card-header text-center">
+<div class="card text-center">
   <h5 id="card-unavailable"></h5>
   Insert card information here!
   <div class="card-body">
     <%= form_for [@venue,@reservation], html: {class:'form-horizontal add-card', id:"payment-form"} do |f| %>
-      <%= f.hidden_field :name, value: @reservation.name %>
+      <%= f.hidden_field :name, value: @venue.name%>
       <%= f.hidden_field :start, as: :hidden, value: @reservation.start, class: 'start_hidden' %>
       <%= f.hidden_field :end, as: :hidden, value: @reservation.end, class: 'form-control input-md end_hidden' %>
 
       <div class="form-row">
         <label for="card-element">
-          Credit or debit card 
+          Credit or debit card!
         </label>
         <!-- <%= text_field_tag :card_number, nil, name: nil, class: 'form-control', data: {stripe: 'number' }, placeholder: 'Card Number' %> -->
         <div id="card-element" >
           <!-- a Stripe Element will be inserted here. -->
         </div>
-        <div id="card-errors" role="alert"></div>
-      <%= f.submit 'Confirm' %>
+      </div>
+      <div id="card-errors" role="alert"></div>
+      <br>
       <div class="form-actions">
+        <%= f.button :Pay, class:'btn btn-primary' %>
+
         <%= link_to 'Delete',  
                     venue_reservation_path, 
                     method: :delete, 

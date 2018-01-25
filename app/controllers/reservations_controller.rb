@@ -1,4 +1,5 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
   before_action :set_venue_and_user
 
@@ -34,14 +35,17 @@ class ReservationsController < ApplicationController
 
     if params[:Preview]
       flash[:alert] = "Please review the final details of your order"
+      session[:reservation] = params[:reservation]
       redirect_to confirmation_venue_reservations_path
 
     elsif @reservation.valid?
       token = params[:stripeToken]
 
       # Charge the user's card:
+      amount = (@reservation.end - @reservation.start)/1.minutes
+      total = amount * @venue.price
       charge = Stripe::Charge.create(
-        :amount => 1000,
+        :amount => total.to_i,
         :currency => "gbp",
         :description => "Example charge",
         :capture => false,
@@ -122,6 +126,7 @@ class ReservationsController < ApplicationController
     def set_venue_and_user
       @venue = Venue.find(params[:venue_id])
       gon.venue_id = @venue.id
+      #gon.venue_business = @venue.business_hours HAVE TO IMPLEMENT
       @user = current_user
     end
 

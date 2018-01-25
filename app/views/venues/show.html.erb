@@ -9,10 +9,10 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <% @venue.images.each_with_index do |ven, x| %>
-      <div class="carousel-item <%= 'active' if ven == @venue.images[0] %>">
-        <%= image_tag(ven, class:'d-block img-fluid') %>
+      <div class="carousel-item <%= 'active' if x==0 %>" style="background-color:black">
+        <%= image_tag(ven, class:'d-block img-fluid' )%>
         <div class="carousel-caption">
-            <h3><%= x %> image</h3>
+            <h3><%= x+1 %></h3>
         </div>
       </div>
     <% end %>
@@ -37,15 +37,23 @@
   <div class="row">
     <div class="col-md-8">
       <h1 class="card-title" id="venue"><%= @venue.name %></h1>
-      <p class="card-text">£<%= @venue.byline %></p>
+      <p class="card-text"><h3><%= @venue.byline %></h3></p>
     </div>
     <div class="col-md-4">
-      <div class="card card-body">
-        <% if user_signed_in? %>
-          <h1>Bookings <%= link_to "+", new_venue_reservation_path(@venue, @reservation) %></h1>
-        <% end %>
-        <%= link_to 'Edit', edit_venue_path(@venue) %>
-        <%= link_to 'Back', venues_path %>
+      <div class="card">
+          <div class='card-body'>
+            <h1>£ <%= @venue.price %> / h </h1>
+          </div>
+          <div class='card-footer'>
+            <% if user_signed_in? %>
+            <h3>Bookings <%= link_to "+", new_venue_reservation_path(@venue, @reservation) %></h3>
+            <% end %>
+            <% if current_user == @venue.merchant.user %>
+              <%= link_to 'Edit', edit_venue_path(@venue) %>
+              <%= link_to 'Back', venues_path %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

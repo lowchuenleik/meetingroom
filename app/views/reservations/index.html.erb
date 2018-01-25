@@ -1,6 +1,23 @@
 <div class='container'>
+	<br>
 	<div class='calendar'></div>
-	<% @reservations.each do |r| %>
-		<%= r.name %>
+	<% if current_user = @venue.merchant.user %>
+		<% @reservations.each do |r| %>
+			<br>
+			<div class='card'>
+				<div class='card-header'>
+					<%= r.name %>
+				</div>
+			</div>
+		<% end %>
+	<% else %>
+		<% current_user.reservations.ecah do |r| %>
+			<br>
+			<div class='card'>
+				<div class='card-header'>
+					<%= r.name %>
+				</div>
+			</div>
+		<% end %>
 	<% end %>
 </div>
