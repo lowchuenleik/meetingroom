@@ -14,19 +14,19 @@ class VenuesController < ApplicationController
 
   # GET /venues/new
   def new
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = current_user.merchant
     @venue = Venue.new
   end
 
   # GET /venues/1/edit
   def edit
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = current_user.merchant
   end
 
   # POST /venues
   # POST /venues.json
   def create
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = current_user.merchant
     @venue = @merchant.venues.new(venue_params)
 
     respond_to do |format|
@@ -43,7 +43,7 @@ class VenuesController < ApplicationController
   # PATCH/PUT /venues/1
   # PATCH/PUT /venues/1.json
   def update
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = current_user.merchant
     respond_to do |format|
       if @venue.update(venue_params)
         format.html { redirect_to @venue, notice: 'Venue was successfully updated.' }
@@ -58,7 +58,7 @@ class VenuesController < ApplicationController
   # DELETE /venues/1
   # DELETE /venues/1.json
   def destroy
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = current_user.merchant
     @venue.destroy
     respond_to do |format|
       format.html { redirect_to merchant_path(@merchant), notice: 'Venue was successfully destroyed.' }

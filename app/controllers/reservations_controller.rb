@@ -6,7 +6,12 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = @venue.reservations
+    if @venue != nil
+      @reservations = @venue.reservations
+    else
+      @user = current_user
+      @reservations = @user.reservations
+    end
 
   end
 
@@ -124,10 +129,13 @@ class ReservationsController < ApplicationController
     end
 
     def set_venue_and_user
-      @venue = Venue.find(params[:venue_id])
-      gon.venue_id = @venue.id
+      if params[:venue_id] != nil
+        @venue = Venue.find(params[:venue_id])
+        gon.venue_id = @venue.id
+      end
       #gon.venue_business = @venue.business_hours HAVE TO IMPLEMENT
       @user = current_user
+      gon.user_id = @user.id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

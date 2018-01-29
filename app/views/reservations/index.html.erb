@@ -1,23 +1,99 @@
 <div class='container'>
 	<br>
-	<div class='calendar'></div>
-	<% if current_user = @venue.merchant.user %>
-		<% @reservations.each do |r| %>
-			<br>
-			<div class='card'>
-				<div class='card-header'>
-					<%= r.name %>
+	<% if @venue != nil %>
+		<%= @venue.name %>'s reservations
+		<% if current_user = @venue.merchant.user %>
+			<div class='calendar'></div>
+			<% @reservations.each do |r| %>
+				<br>
+				<div class='card'>
+					<div class='card-header'>
+						<%= r.name %>
+					</div>
 				</div>
-			</div>
+			<% end %>
+		<% else %>
+			<div class='user_cal'></div>
+			<% current_user.reservations.each do |r| %>
+				<br>
+				<div class='card'>
+					<div class='card-header'>
+						<%= r.name %>
+					</div>
+				</div>
+			<% end %>
 		<% end %>
 	<% else %>
-		<% current_user.reservations.ecah do |r| %>
+	Byebye
+		<div class='user_cal'></div>
+		<% @user.reservations.each do |r| %>
 			<br>
 			<div class='card'>
 				<div class='card-header'>
-					<%= r.name %>
+					<%= r.start %>
+					<%= r.end %>
+				</div>
+				<div class='card-body'>
+					<%= r.price %>
+				</div>
+				<div class='card-footer'>
+					<span> <%=r.name%> </span>
 				</div>
 			</div>
 		<% end %>
 	<% end %>
+
 </div>
+
+<script type='text/javascript'>
+	var initialize_calendar;
+	initialize_calendar = function () {
+
+	      $('.user_cal').each(function(){ 
+
+	        var businessHours = gon.venue_business
+	        var calendar = $(this);
+	        calendar.fullCalendar({
+	          defaultView: 'agendaWeek',
+	          height:500,
+	          header: {
+	              left: 'today',
+	              center: 'prev title next',
+	              right: 'month,agendaWeek,agendaDay'
+	          },
+	          selectable :true,
+	          selectHelper: true,
+	          editable: true,
+	          eventLimit: true,
+	          selectConstraint: {
+
+	          },
+	          minTime: "07:00:00",
+	          maxTime: "21:00:00",
+	          /*
+	          businessHours: [ // specify an array instead
+	              {
+	                  dow: [ 1, 2, 3 ], // Monday, Tuesday, Wednesday
+	                  start: '08:00', // 8am
+	                  end: '18:00' // 6pm
+	              },
+	              {
+	                  dow: [ 4, 5 ], // Thursday, Friday
+	                  start: '10:00', // 10am
+	                  end: '16:00' // 4pm
+	              }
+	          ],
+	          */
+	          unselectAuto: false,
+	          displayEventTime: true,
+	          events: '/users/' + gon.user_id + '/reservations.json',
+
+	          select: function(start, end) {
+	            $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'))
+	            $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
+	          }
+	        });
+	      })
+	  };
+	$(document).on('turbolinks:load', initialize_calendar);
+</script>

@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   end
 
   resources :users do
+    resources :reservations, only: [:index,:show,:new]
     resources :merchants
     resources :transactions
   end
@@ -41,6 +42,8 @@ Rails.application.routes.draw do
   	delete "signout", to: 'devise/sessions#destroy'
   	get "signup", to:'devise/registrations#new'
   end
+
+  get'reservations', to:'reservations#index'
 
   root "pages#home"
   get 'adminv', to:'admins#admin'
