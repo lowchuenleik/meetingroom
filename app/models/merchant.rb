@@ -3,7 +3,4 @@ class Merchant < ApplicationRecord
 	has_many :venues
 	has_many :transactions
 
-	def owner
-		user
-	end
 end

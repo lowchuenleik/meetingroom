@@ -34,7 +34,7 @@
             </p>
           </div>
           <div class="card-body">
-            <% if current_user == merchant.owner %>
+            <% if current_user == merchant.user %>
               <div class="btn-group" role="group" aria-label="hmmm">
                   <button type='button' class="btn btn-md btn-link">
                     <%= link_to 'Show', merchant %>

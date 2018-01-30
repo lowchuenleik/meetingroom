@@ -1,10 +1,12 @@
 class VenuesController < ApplicationController
   before_action :set_venue, only: [:show, :edit, :update, :destroy]
+  before_action :set_merchant, only: [:show, :edit, :update, :destroy, :new]
 
   # GET /venues
   # GET /venues.json
   def index
     @venues = Venue.all
+    @merchant = current_user.merchants.first #HACKY
   end
 
   # GET /venues/1
@@ -14,19 +16,16 @@ class VenuesController < ApplicationController
 
   # GET /venues/new
   def new
-    @merchant = current_user.merchant
-    @venue = Venue.new
+    @venue = @merchant.venues.build
   end
 
   # GET /venues/1/edit
   def edit
-    @merchant = current_user.merchant
   end
 
   # POST /venues
   # POST /venues.json
   def create
-    @merchant = current_user.merchant
     @venue = @merchant.venues.new(venue_params)
 
     respond_to do |format|
@@ -43,7 +42,6 @@ class VenuesController < ApplicationController
   # PATCH/PUT /venues/1
   # PATCH/PUT /venues/1.json
   def update
-    @merchant = current_user.merchant
     respond_to do |format|
       if @venue.update(venue_params)
         format.html { redirect_to @venue, notice: 'Venue was successfully updated.' }
@@ -58,7 +56,6 @@ class VenuesController < ApplicationController
   # DELETE /venues/1
   # DELETE /venues/1.json
   def destroy
-    @merchant = current_user.merchant
     @venue.destroy
     respond_to do |format|
       format.html { redirect_to merchant_path(@merchant), notice: 'Venue was successfully destroyed.' }
@@ -70,6 +67,10 @@ class VenuesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_venue
       @venue = Venue.find(params[:id])
+    end
+
+    def set_merchant
+      @merchant = Merchant.find(params[:merchant_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

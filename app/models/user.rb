@@ -7,11 +7,11 @@ class User < ActiveRecord::Base
          
     has_many :clients
     has_many :bookings 
-    has_one :merchant, dependent: :destroy
+    has_many :merchants, dependent: :destroy
     has_many :reservations
     has_many :transactions
     
-    accepts_nested_attributes_for :merchant
+    accepts_nested_attributes_for :merchants
 
 
     def self.from_omniauth(auth)
