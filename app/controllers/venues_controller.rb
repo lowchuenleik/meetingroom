@@ -1,6 +1,6 @@
 class VenuesController < ApplicationController
   before_action :set_venue, only: [:show, :edit, :update, :destroy]
-  before_action :set_merchant, only: [:show, :edit, :update, :destroy, :new]
+  before_action :set_merchant, only: [:show, :edit, :update, :destroy, :new, :create]
 
   # GET /venues
   # GET /venues.json
@@ -30,7 +30,7 @@ class VenuesController < ApplicationController
 
     respond_to do |format|
       if @venue.save
-        format.html { redirect_to @venue, notice: 'Venue was successfully created.' }
+        format.html { redirect_to merchant_venue_url(@merchant,@venue), notice: 'Venue was successfully created.' }
         format.json { render :show, status: :created, location: @venue }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class VenuesController < ApplicationController
   def update
     respond_to do |format|
       if @venue.update(venue_params)
-        format.html { redirect_to @venue, notice: 'Venue was successfully updated.' }
+        format.html { redirect_to merchant_venue_path, notice: 'Venue was successfully updated.' }
         format.json { render :show, status: :ok, location: @venue }
       else
         format.html { render :edit }
@@ -70,7 +70,9 @@ class VenuesController < ApplicationController
     end
 
     def set_merchant
-      @merchant = Merchant.find(params[:merchant_id])
+      if params[:merchant_id]
+        @merchant = Merchant.find(params[:merchant_id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
