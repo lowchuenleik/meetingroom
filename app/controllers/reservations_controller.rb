@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+  before_action :set_reservation, only: [:show, :edit, :update, :destroy, :process_charge]
   before_action :set_venue_and_user
 
   # GET /reservations
@@ -47,10 +47,9 @@ class ReservationsController < ApplicationController
       token = params[:stripeToken]
 
       # Charge the user's card:
-      amount = (@reservation.end - @reservation.start)/1.minutes
-      total = amount * @venue.price
+
       charge = Stripe::Charge.create(
-        :amount => total.to_i,
+        :amount => @reservation.calc_amount(venue_price),
         :currency => "gbp",
         :description => "Example charge",
         :capture => false,
@@ -102,9 +101,6 @@ class ReservationsController < ApplicationController
     end
   end
 
-
-
-
   def save_session
     session[:reservation] = params[:reservation]
     redirect_to confirmation_path
@@ -113,6 +109,7 @@ class ReservationsController < ApplicationController
   def confirmation
     params[:reservation] = session[:reservation]
     @reservation = Reservation.new(reservation_params)
+
     #respond_to do |format|
       #format.json { render :confirmation, location: @reservation }
     #end

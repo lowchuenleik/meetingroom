@@ -4,27 +4,28 @@
 <% end %>
 
 	<div class="row">
-	    <div class="col-xl-8">
+	    <div class="col-xl-12">
 		    <br>
-	    	<%= render 'billing', user: @user %>
-
-	    </div>
-	    <div class="col-xl-4">
-		    <br>
-	    	<div class='card'>
+		    <div class='card'>
 		    	<%= image_tag @venue.images[0], class:'card-img-top', alt:'Card image cap' %>
 		    	<div class='card-body'>
 
-					<h2 class='card-title'><%= @reservation.name %></h2>
-					<p class='card-text'><%= @venue.name %> </p>
-					<p class='card-text'><%= @reservation.start %></p>
-					<p class='card-text'><%= @reservation.end %></p>
+					<h5 class='card-title'><%= @reservation.name %></h5>
+					<h3 class='card-title'><%= @venue.name %> </h3>
+					<p class='card-text'><%= @reservation.start.to_date %> from <%= @reservation.start.strftime("%I:%M%p") %> to <%= @reservation.end.strftime("%I:%M%p") %></p>
+					<p class='card-text'> You are being charged this much <strong> <%= @reservation.calc_amount(@venue.price) %> </strong> </p>
 					<br>
 
 					<%= link_to 'Back', new_venue_reservation_path, class:'btn btn-primary' %>
 				</div>
 			</div>
+		    
+		    <br>
+	    	<%= render 'billing', user: @user %>
+
 	    </div>
+		    <br>
+	    	
 	</div>
 
 	

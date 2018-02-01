@@ -40,22 +40,21 @@
     
       <div class="card-deck">
         <% @venues.each do |venue| %>
-          <div class="col-md-4">
-            <div class="card" id="Venue" style="margin-bottom: 1em">
+          <div class="col-md-4" style="padding: 5px;margin-bottom:.5em">
+            <div class="card box-shadow" id="Venue">
               <% if venue.images[0] == nil %>
                 <img class="card-img-top" src="http://placehold.it/350x250" alt="Card image cap">
 
               <% else %>
                 <%= image_tag(venue.images[0], class:'card-img-top') %> 
-
               <% end %>
               <div class="card-body">
-                <h2 class="float-right">£<%= venue.price %></h2>
+                <h5 class="float-right">£<%= venue.price %><small class='text-muted'>/ hour</small></h5>
                 <h4 class="card-title"><%= link_to venue.name , venue_path(venue), style:"color:black" %></h4>
-                <p class="font-italic lead card-text"><%= venue.byline%></p>
+                <p class="font-italic card-text"><%= venue.byline%></p>
               </div>
               <div class="card-footer">
-                  <span><%= link_to "Book now", "#", class: "btn btn-primary btn-md" %></span>
+                  <span><%= link_to "Book now", new_venue_reservation_path(venue), class: "btn btn-primary btn-md" %></span>
               </div>
             </div>
           </div>

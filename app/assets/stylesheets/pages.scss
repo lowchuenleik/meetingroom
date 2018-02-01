@@ -8,8 +8,21 @@
     background-position: center center;
     background-size: cover;
     height: 900px;
-    margin-top: -40px;
+}
 
+.jumbotron-landing {
+    background-image: url(image_path('laptop.jpg'));
+    background-color: grey;
+    background-blend-mode: multiply; 
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 500px;
+    color: white;
+}
+
+#home-button {
+  width:10em;
 }
 
 .navbar-brand{
@@ -40,6 +53,23 @@ h1#venue {
   font-size: 80px;
 }
 
+//navbar
+
+#navbar {
+  color:#FBFBFB;
+  border-top:2px;
+  border-top-color:black;
+  border: 3px;
+}
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+
+//for venue index 
+
 .item img {
     position: absolute;
     top: 0;
@@ -50,6 +80,8 @@ h1#venue {
 .portfolio-item {
   margin-bottom: 30px;
 }
+
+
 
 // For the venue carousel
 

@@ -87,8 +87,8 @@ $(document).ready(function(){
         errorElement.textContent = result.error.message;
       } else {
         // Send the token to your server#
-          alert(result.token.id);
-      alert('Submitting form');
+          //alert(result.token.id);
+      //alert('Submitting form');
       var tok = result.token.id;
       $("input[id=stripe_temporary_token]").val(tok);
         stripeTokenHandler(result.token);

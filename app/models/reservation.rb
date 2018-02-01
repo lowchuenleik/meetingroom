@@ -4,10 +4,17 @@ class Reservation < ApplicationRecord
 	before_create :randomize_id
 	
 	attr_accessor :date_range
+	attr_accessor :amount
 
 	def all_day_reservation?
 	  self.start == self.start.midnight && self.end == self.end.midnight ? true : false
 	end
+
+	def calc_amount(venue_price)
+		amount = (self.end - self.start)/1.hours
+		self.price = amount * venue_price
+	end
+
 
 	private
 

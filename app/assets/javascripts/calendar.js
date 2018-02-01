@@ -16,7 +16,8 @@ initialize_calendar = function () {
           },
           selectable :true,
           selectHelper: true,
-          editable: true,
+          editable: false,
+          eventOverlap: false,
           eventLimit: true,
           selectConstraint: {
 

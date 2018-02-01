@@ -12,30 +12,22 @@
     <%= Gon::Base.render_data %>
     <%= include_gon(:init => true) %>
 
-    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
-    
 
   </head>
 
 
     <!-- Navigation Bar -->
-    <div class="row-fluid">
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
+    <div class="row-fluid border-bottom box-shadow">
+      <nav class="navbar navbar-expand-sm" id="navbar">
         <div class="container">
           <div class="navbar-header">
-            <%= link_to image_tag("hang-white.png", alt:"logo", id: "logo1") , root_path, class: "navbar-brand" %>
+            <%= link_to image_tag("hang-black.png", alt:"logo", id: "logo1") , root_path, class: "navbar-brand" %>
           </div>
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "Contact", contact_us_path, class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "Venues", venues_path, class: "nav-link" %></li>
-          </ul>
+         
           <ul class="navbar-nav">
             <% if user_signed_in? %>
               <li class="nav-item"><%= link_to "Log out", signout_path, method: :delete, class: "nav-link" %></li>
@@ -64,8 +56,19 @@
     <footer class="small text-muted">
       <div class="container">
         <hr>
+
+        <nav class='nav justify-content-lg-center'>
+          <a class="nav-link"><strong><%= link_to "About", about_path, class: "nav-link" %></strong></a>
+          <a class="nav-link"><strong><%= link_to "Contact", contact_us_path, class: "nav-link" %></strong></a>
+          <a class="nav-link"><strong><%= link_to "Venues", venues_path, class: "nav-link" %></strong></a>
+        </nav>
+
+        <div>
+          <span class='float-right'>support@hangspaces.com</span>
+          <p class='text-left'>© 2016 Hangspaces</p>
+        </div>
+
         <center>
-          <p>© 2016 Hangspaces</p>
         </center>
       </div>
     </footer>
