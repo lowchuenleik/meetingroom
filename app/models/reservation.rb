@@ -2,7 +2,9 @@ class Reservation < ApplicationRecord
 	belongs_to :user
 	belongs_to :venue
 	before_create :randomize_id
-	
+	validates :terms, acceptance: true
+
+	attr_accessor :terms
 	attr_accessor :date_range
 	attr_accessor :amount
 
