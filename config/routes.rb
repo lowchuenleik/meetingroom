@@ -46,6 +46,8 @@ Rails.application.routes.draw do
 
   get'reservations', to:'reservations#index'
 
+  post '/send_mail', to:'reservations#send_mail'
+
   root "pages#home"
   get 'adminv', to:'admins#admin'
   get 'about', to: 'pages#about'

@@ -49,7 +49,7 @@ class ReservationsController < ApplicationController
       # Charge the user's card:
 
       charge = Stripe::Charge.create(
-        :amount => @reservation.calc_amount(venue_price),
+        :amount => @reservation.calc_amount(@venue.price),
         :currency => "gbp",
         :description => "Example charge",
         :capture => false,
@@ -75,7 +75,13 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def 
+  def send_mail
+    @user = current_user
+    email = params[:email]
+    UserMailer.welcome_email(@user, email).deliver
+    flash[:notice] = "Email has been sent."
+    redirect_to root_path
+  end
 
   # PATCH/PUT /reservations/1
   # PATCH/PUT /reservations/1.json

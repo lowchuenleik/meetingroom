@@ -22,8 +22,8 @@
 
      -->
     <br>
-    <div class='container home'>
-        <div class='jumbotron jumbotron-landing text-center'>
+
+    <div class='jumbotron jumbotron-landing text-center'>
             <h2 style='margin-top:3em'>Meetings made simple.</h2>
             <% link_to "Come and check out our venues", venues_path, class: "btn btn-primary btn-lg" %> 
             <br>
@@ -31,59 +31,89 @@
             <%= link_to "Book now", venues_path, class: "btn btn-primary btn-lg", id:'home-button' %>
         </div>
 
-    <div class="row justify-content-lg-center">
+    <div class='container home'>
 
-      <div class='card-deck'>
-        <div class="col-md-4" style="padding: 5px;margin-bottom:.5em">
-          <div class="card box-shadow" id="Venue">
-            
-            <%= image_tag(Venue.first.images[0], class:'card-img-top') %> 
-            <div class="card-body">
-              <h5 class="float-right">£<%= Venue.first.price %><small class='text-muted'>/ hour</small></h5>
-              <h4 class="card-title"><%= link_to Venue.first.name , venue_url(Venue.first), style:"color:black" %></h4>
-              <p class="font-italic card-text"><%= Venue.first.byline%></p>
+      <div class="row justify-content-lg-center">
+
+        <div class='card-deck'>
+          <div class="col-md-4" style="padding: 5px;margin-bottom:.5em">
+            <div class="card box-shadow" id="Venue">
+              
+              <%= image_tag(Venue.first.images[0], class:'card-img-top') %> 
+              <div class="card-body">
+                <h5 class="float-right">£<%= Venue.first.price %><small class='text-muted'>/ hour</small></h5>
+                <h4 class="card-title"><%= link_to Venue.first.name , venue_url(Venue.first), style:"color:black" %></h4>
+                <p class="font-italic card-text"><%= Venue.first.byline%></p>
+              </div>
+              <div class="card-footer">
+                  <span><%= link_to "Book now", new_venue_reservation_path(Venue.first), class: "btn btn-primary btn-md" %></span>
+              </div>
             </div>
-            <div class="card-footer">
-                <span><%= link_to "Book now", new_venue_reservation_path(Venue.first), class: "btn btn-primary btn-md" %></span>
+          </div>
+          <div class="col-md-4" style="padding: 5px;margin-bottom:.5em">
+            <div class="card box-shadow" id="Venue">
+              
+              <%= image_tag(Venue.fourth.images[0], class:'card-img-top') %> 
+              <div class="card-body">
+                <h5 class="float-right">£<%= Venue.fourth.price %><small class='text-muted'>/ hour</small></h5>
+                <h4 class="card-title"><%= link_to Venue.fourth.name , venue_url(Venue.fourth), style:"color:black" %></h4>
+                <p class="font-italic card-text"><%= Venue.fourth.byline%></p>
+              </div>
+              <div class="card-footer">
+                  <span><%= link_to "Book now", new_venue_reservation_path(Venue.fourth), class: "btn btn-primary btn-md" %></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" style="padding: 5px;margin-bottom:.5em">
+            <div class="card box-shadow" id="Venue">
+              
+              <%= image_tag(Venue.third.images[0], class:'card-img-top') %> 
+              <div class="card-body">
+                <h5 class="float-right">£<%= Venue.third.price %><small class='text-muted'>/ hour</small></h5>
+                <h4 class="card-title"><%= link_to Venue.third.name , venue_url(Venue.third), style:"color:black" %></h4>
+                <p class="font-italic card-text"><%= Venue.third.byline%></p>
+              </div>
+              <div class="card-footer">
+                  <span><%= link_to "Book now", new_venue_reservation_path(Venue.third), class: "btn btn-primary btn-md" %></span>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4" style="padding: 5px;margin-bottom:.5em">
-          <div class="card box-shadow" id="Venue">
-            
-            <%= image_tag(Venue.first.images[0], class:'card-img-top') %> 
-            <div class="card-body">
-              <h5 class="float-right">£<%= Venue.first.price %><small class='text-muted'>/ hour</small></h5>
-              <h4 class="card-title"><%= link_to Venue.first.name , venue_url(Venue.first), style:"color:black" %></h4>
-              <p class="font-italic card-text"><%= Venue.first.byline%></p>
-            </div>
-            <div class="card-footer">
-                <span><%= link_to "Book now", new_venue_reservation_path(Venue.first), class: "btn btn-primary btn-md" %></span>
-            </div>
+
+
+    <div class='container' style='margin-top:5em'>
+      <div class='row text-center' style="font-size:1em; color:#383838">
+          <div class='col-lg'>
+              <i class="fa fa-briefcase fa-5x" id='main-icon-homepage'></i>
+              <h5 class='lead'>Work here</h5>
           </div>
-        </div>
-        <div class="col-md-4" style="padding: 5px;margin-bottom:.5em">
-          <div class="card box-shadow" id="Venue">
-            
-            <%= image_tag(Venue.first.images[0], class:'card-img-top') %> 
-            <div class="card-body">
-              <h5 class="float-right">£<%= Venue.first.price %><small class='text-muted'>/ hour</small></h5>
-              <h4 class="card-title"><%= link_to Venue.first.name , venue_url(Venue.first), style:"color:black" %></h4>
-              <p class="font-italic card-text"><%= Venue.first.byline%></p>
-            </div>
-            <div class="card-footer">
-                <span><%= link_to "Book now", new_venue_reservation_path(Venue.first), class: "btn btn-primary btn-md" %></span>
-            </div>
+          <div class='col-lg'>
+              <i class="fa fa-calendar fa-5x" id='main-icon-homepage'></i>
+              <h5 class='lead'>Meet here</h5>
           </div>
-        </div>
+          <div class='col-lg'>
+              <i class="fa fa-industry fa-5x" id='main-icon-homepage'></i>
+              <h5 class='lead'>Create here</h5>
+          </div>
+          <div class='col-lg'>
+              <i class="fa fa-coffee fa-5x" id='main-icon-homepage'></i>
+              <h5 class='lead'>Relax here</h5>
+          </div>
       </div>
+    </div>
 
     <div class='col-lg-12 text-center'>
-        <h2 style='margin-top:3em;margin-bottom:3em'>
-        Wanna be a Hang partner? Let us know! </h2>
+      <h2 style='margin-top:3em;margin-bottom:3em'>Wanna be a Hang partner? Let us know! </h2>
+
+        <%= form_tag(send_mail_path) do %>
+              <div class="form-group">
+                 <%= label_tag 'email', 'Email' %>
+                 <%= email_field_tag 'email', nil, class: 'form-control', placeholder: 'Your Email Address' %>
+             </div>
+             <%= submit_tag 'Join!', class: 'btn btn-default btn-about float-right' %>
+        <% end %>
     </div>
 
-    </div>
 
 <% else %>
     <div class="jumbotron jumbotron-home">
