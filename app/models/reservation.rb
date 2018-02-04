@@ -2,7 +2,7 @@ class Reservation < ApplicationRecord
 	belongs_to :user
 	belongs_to :venue
 	before_create :randomize_id
-	validates :terms, acceptance: true
+	validate :minimum_time
 
 	attr_accessor :terms
 	attr_accessor :date_range
@@ -14,11 +14,17 @@ class Reservation < ApplicationRecord
 
 	def calc_amount(venue_price)
 		amount = (self.end - self.start)/1.hours
-		self.price = amount * venue_price
+		self.price = (amount * venue_price).to_i
 	end
 
 
 	private
+
+	def minimum_time
+		if (self.end - self.start)/1.hours < 1
+			errors.add(:base, "Minimum time is an hour")
+		end
+	end
 
 	def randomize_id
 		begin

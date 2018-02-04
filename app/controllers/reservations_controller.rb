@@ -43,6 +43,18 @@ class ReservationsController < ApplicationController
       session[:reservation] = params[:reservation]
       redirect_to confirmation_venue_reservations_path
 
+    elsif params[:block_out]
+      @reservation.color = '#C1876B'
+      respond_to do |format|
+        if @reservation.save! # - GOES THROUGH OKAY
+          format.html { redirect_to venue_reservation_url(@venue, @reservation), notice: 'Time slot blocked out.' }
+          format.json { render :show, status: :created, location: @reservation }
+        else
+          format.html { render :new }
+          format.json { render json: @reservation.errors, status: :unprocessable_entity }
+        end
+      end
+
     elsif @reservation.valid?
       token = params[:stripeToken]
 
@@ -70,7 +82,7 @@ class ReservationsController < ApplicationController
         end
       end
     else
-      flash[:error] = 'One or more errors'
+      flash[:error] = @reservation.errors.full_messages.first
       redirect_to confirmation_venue_reservations_path
     end
   end
@@ -143,6 +155,6 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:name, :commit, :reservation,:title, :price, :date, :end, :start, :user_id, :venue_id,:merchant_id,:date_range)
+      params.require(:reservation).permit(:name,:color, :commit, :reservation,:title, :price, :date, :end, :start, :user_id, :venue_id,:merchant_id,:date_range)
     end
 end

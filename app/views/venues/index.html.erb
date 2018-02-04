@@ -65,8 +65,9 @@
 
   <br>
 
-
-  <% if current_user.is_seller? %>
-    <%= link_to 'New Venue', new_merchant_venue_path(@merchant) %>
+  <% if user_signed_in? %>
+    <% if current_user.is_seller? && %>
+      <%= link_to 'New Venue', new_merchant_venue_path(@merchant) %>
+    <% end %>
   <% end %>
 </div>

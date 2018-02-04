@@ -104,16 +104,17 @@
     <div class='col-lg-12 text-center'>
       <h2 style='margin-top:3em;margin-bottom:1em'>Wanna be a Hang partner? Let us know! </h2>
 
-        <%= form_tag(send_mail_path, class:'form-inline justify-content-center', style:'margin-bottom:7em') do %>
+        <%= form_tag(send_mail_path, class:'form-inline justify-content-center', id:'test', style:'margin-bottom:.5em') do %>
               <div class="form-group">
                  <%= email_field_tag 'email', nil, class: 'form-control ', style:'width:600px;margin-right:.5em;', placeholder: 'Your Email Address' %>
               </div>
-              <%= submit_tag 'Join!', class: 'btn btn-default btn-about float-right' %>
-              <%= check_box_tag('Accept','terms') %>
+              <%= submit_tag 'Join!', class: 'btn btn-default btn-about float-right'%>
 
         <% end %>
-
-
+      <div class='row justify-content-center' style='margin-bottom:7em;'>
+        <input id="checkbox" name="accept" type="checkbox" value="1" style='height,width:15px;margin-top:5px;margin-right: 10px;'>
+        <p class='display-5'> You have to agree to our terms and conditions first </p>
+      </div>
     </div>
     </div>
 
@@ -155,3 +156,14 @@
 <% end %>
 
      -->
+
+<script type='text/javascript'>
+  var validate_checkbox;
+  $('#test').submit(function(e){
+    if( $('#checkbox').is(':checked') == false){
+      alert("You have to accept our terms and conditions first!");
+      e.preventDefault();
+      location.reload();
+    }
+  })
+</script>

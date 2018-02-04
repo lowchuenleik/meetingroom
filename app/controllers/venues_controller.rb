@@ -6,7 +6,9 @@ class VenuesController < ApplicationController
   # GET /venues.json
   def index
     @venues = Venue.all
-    @merchant = current_user.merchants.first #HACKY
+    if user_signed_in?
+      @merchant = current_user.merchants.first #HACKY
+    end
   end
 
   # GET /venues/1

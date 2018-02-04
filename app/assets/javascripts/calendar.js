@@ -1,10 +1,16 @@
 var initialize_calendar;
 initialize_calendar = function () {
 
-      $('.calendar').each(function(){ 
-
+      $('.calendar').each(function(){
+        var event_source
         var venue_fix = '/venues/' + gon.venue_id
-        var businessHours = gon.venue_business
+        if (gon.venue_id != null) {
+
+          event_source = venue_fix + '/reservations.json';
+        } else {
+          event_source = '/users/' + gon.user_id + '/reservations.json'
+        }
+        var businessHours = gon.venue_business;
         var calendar = $(this);
         calendar.fullCalendar({
           defaultView: 'agendaWeek',
@@ -19,6 +25,22 @@ initialize_calendar = function () {
           editable: false,
           eventOverlap: false,
           eventLimit: true,
+          slotEventOverlap: false,
+          allDaySlot: false,
+          events: event_source,
+
+          eventClick: function(calEvent, jsEvent, view) {
+            var event_path = ''
+            document.location.href = 'reservations/' + calEvent.id
+          },
+
+          eventDrop: function(event, delta, revertFunc) {
+
+              if (!event.start.startOf('day').isSame(event.end.startOf('day'))) {
+                   revertFunc();
+              }
+          },
+
           selectConstraint: {
 
           },
@@ -40,12 +62,10 @@ initialize_calendar = function () {
           */
           unselectAuto: false,
           displayEventTime: true,
-          events: venue_fix + '/reservations.json',
-
           select: function(start, end) {
             $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'))
             $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
-          }
+          },
           /*
           select: function(start, end) {
             $.getScript( venue_fix + '/reservations/new', function() {
