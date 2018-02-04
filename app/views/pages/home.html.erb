@@ -70,6 +70,9 @@
               <div class="card-body">
                 <h5 class="float-right">£<%= Venue.third.price %><small class='text-muted'>/ hour</small></h5>
                 <h4 class="card-title"><%= link_to Venue.third.name , venue_url(Venue.third), style:"color:black" %></h4>
+                <!-- Testing purposes to try out badge, must be conditional in future 
+                <span class="badge badge-pill badge-primary float-right" style='font-size: 13px;'>Hot</span>
+                -->
                 <p class="font-italic card-text"><%= Venue.third.byline%></p>
               </div>
               <div class="card-footer">

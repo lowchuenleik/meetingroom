@@ -28,7 +28,6 @@
                     data: { confirm: 'Are you sure?' }, 
                     remote: true unless @reservation.new_record? %>
 
-        <%= @reservation.errors.full_messages.first if @user.errors.any? %>
       </div>
     <% end %>
   </div>
