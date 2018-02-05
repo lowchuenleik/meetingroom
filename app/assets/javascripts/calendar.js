@@ -10,9 +10,20 @@ initialize_calendar = function () {
         } else {
           event_source = '/users/' + gon.user_id + '/reservations.json'
         }
+
+        var redirect_hack
+        if (document.location.href.includes('/new')){
+          redirect_hack = ''
+          console.log('realizes its on the new page!')
+        } else {
+          redirect_hack = 'reservations/'
+        }
+
+
         var businessHours = gon.venue_business;
         var calendar = $(this);
         calendar.fullCalendar({
+          events: event_source,
           defaultView: 'agendaWeek',
           height:500,
           header: {
@@ -24,25 +35,14 @@ initialize_calendar = function () {
           selectHelper: true,
           editable: false,
           eventOverlap: false,
-          eventLimit: true,
+          selectOverlap: function(event) {
+              return event.rendering === 'background';
+          },
           slotEventOverlap: false,
+          eventLimit: true,
           allDaySlot: false,
-          events: event_source,
-
           eventClick: function(calEvent, jsEvent, view) {
-            var event_path = ''
-            document.location.href = 'reservations/' + calEvent.id
-          },
-
-          eventDrop: function(event, delta, revertFunc) {
-
-              if (!event.start.startOf('day').isSame(event.end.startOf('day'))) {
-                   revertFunc();
-              }
-          },
-
-          selectConstraint: {
-
+            document.location.href =  redirect_hack + calEvent.id
           },
           minTime: "07:00:00",
           maxTime: "21:00:00",
@@ -65,6 +65,12 @@ initialize_calendar = function () {
           select: function(start, end) {
             $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'))
             $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
+
+            $('#testing').val(moment(end).format('YYYY-MM-DD HH:mm'));
+
+            if (!start.startOf('day').isSame(end.startOf('day'))) {
+                 calendar.fullCalendar( 'unselect' );
+            }
           },
           /*
           select: function(start, end) {

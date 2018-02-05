@@ -46,10 +46,10 @@
           </div>
           <div class='card-footer'>
             <% if user_signed_in? %>
-            <h3>Bookings <%= link_to "+", new_venue_reservation_path(@venue, @reservation) %></h3>
+            <h3>Book now <%= link_to "+", new_venue_reservation_path(@venue, @reservation) %></h3>
             <% end %>
             <% if current_user == @venue.merchant.user %>
-              <%= link_to 'Edit', edit_venue_path(@venue) %>
+              <%= link_to 'Edit', edit_venue_path(@venue) %> | 
               <%= link_to 'Back', venues_path %>
             <% end %>
           </div>

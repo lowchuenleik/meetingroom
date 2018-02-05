@@ -23,6 +23,9 @@ class VenuesController < ApplicationController
 
   # GET /venues/1/edit
   def edit
+    if @merchant == nil
+      redirect_to merchant_venue_edit_url
+    end
   end
 
   # POST /venues
@@ -73,7 +76,9 @@ class VenuesController < ApplicationController
 
     def set_merchant
       if params[:merchant_id]
-        @merchant = Merchant.find(params[:merchant_id])
+        @merchant =  Merchant.find(params[:merchant_id])
+      else
+        @merchant = @venue.merchant
       end
     end
 
