@@ -9,7 +9,7 @@
     <title>Hang - Meetings Sorted</title>
 
     <%= favicon_link_tag 'logo.ico' %>
-    
+
     <%= csrf_meta_tags %>
     <%= Gon::Base.render_data %>
     <%= include_gon(:init => true) %>
@@ -27,11 +27,13 @@
       <nav class="navbar navbar-expand-sm" id="navbar">
         <div class="container">
           <div class="navbar-header">
-            <%= link_to image_tag("hang-black.png", alt:"logo", id: "logo1") , root_path, class: "navbar-brand", style:'size:150%' %>
+            <%= link_to image_tag("hang-black.png", alt:"logo", id: "logo1") , root_path, class: "navbar-brand", style:'size:150%;margin-right:2rem' %>
           </div>
           <form class="form-inline my-4 my-lg-0 mr-auto">
             <input class="form-control mr-sm-4" type="text" placeholder="Find your venue">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <%= link_to "Search",venues_path, class:"btn btn-outline-success my-2 my-sm-0"%>
+            <!-- 
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" href='venues_path' >Search</button>  -->
           </form>
           <ul class="navbar-nav">
             <% if user_signed_in? %>

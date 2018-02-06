@@ -37,21 +37,37 @@
   <div class="row">
     <div class="col-md-8">
       <h1 class="card-title" id="venue"><%= @venue.name %></h1>
-      <p class="card-text"><h3><%= @venue.byline %></h3></p>
+      <p class="card-text"><h2><%= @venue.byline %></h2></p>
+      <br>
+      <p class='card-text lead'> Seats <%= @venue.capacity %> </p>
+      <p class='card-text lead'> Located at: <%= @venue.street_address %> </p>
+
+      <br>
+
+      <iframe
+        width="100%"
+        height="450"
+        frameborder="0" style="border:0"
+        src="<%= google_embed_view([@venue.latitude,@venue.longitude].join(','))%>" allowfullscreen>
+      </iframe>
     </div>
     <div class="col-md-4">
       <div class="card">
           <div class='card-body'>
-            <h1>£ <%= @venue.price %> / h </h1>
+            <h1 class='strong'><strong>£ <%= @venue.price %> </strong>/ h </h1>
+            <!-- 
+            <%= image_tag google_static([@venue.latitude,@venue.longitude].join(',')), style:'height:100%;width:100%' %>
+             -->
+
           </div>
           <div class='card-footer'>
             <% if user_signed_in? %>
-            <h3>Book now <%= link_to "+", new_venue_reservation_path(@venue, @reservation) %></h3>
+            <h3><%= link_to "Book now", new_venue_reservation_path(@venue, @reservation), class:'btn btn-primary' %></h3>
             <% end %>
             <% if current_user == @venue.merchant.user %>
               <%= link_to 'Edit', edit_venue_path(@venue) %> | 
-              <%= link_to 'Back', venues_path %>
             <% end %>
+            <%= link_to 'Back', venues_path %>
           </div>
         </div>
       </div>

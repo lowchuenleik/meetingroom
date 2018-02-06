@@ -25,13 +25,6 @@
   width:10em;
 }
 
-.navbar-brand{
-    max-height: 50px;
-    overflow: visible;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
 .full-screen {
   background-size: cover;
   background-position: center center;
@@ -61,6 +54,18 @@ h1#venue {
   margin-bottom:30px;
 }
 //navbar
+
+
+.navbar-brand{
+    max-height: 50px;
+    overflow: visible;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right:2rem;
+}
+
+
+
 
 #navbar {
   color:#FBFBFB;

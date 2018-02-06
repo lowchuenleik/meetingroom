@@ -44,7 +44,7 @@ class ReservationsController < ApplicationController
       redirect_to confirmation_venue_reservations_path
 
     elsif params[:block_out]
-      @reservation.color = '#C1876B'
+      @reservation.color = '#E74C3C'
       respond_to do |format|
         if @reservation.save! # - GOES THROUGH OKAY
           format.html { redirect_to venue_reservation_url(@venue, @reservation), notice: 'Time slot blocked out.' }
@@ -56,6 +56,7 @@ class ReservationsController < ApplicationController
       end
 
     elsif @reservation.valid?
+      @reservation.color = '#2ecc71'
       token = params[:stripeToken]
 
       # Charge the user's card:
