@@ -5,8 +5,8 @@
 			<%= @venue.name %>'s reservations
 		</h3>
 		<br>
-		<% if current_user = @venue.merchant.user %>
-			<div class='calendar'></div>
+		<% if @user = @venue.merchant.user %>
+			<div class='calendar'></div> 
 			<% @reservations.each do |r| %>
 				<br>
 				<div class='card'>
@@ -23,7 +23,7 @@
 			<% end %>
 		<% else %>
 			<div class='user_cal'></div>
-			<% current_user.reservations.each do |r| %>
+			<% @user.reservations.each do |r| %>
 				<br>
 					<div class='card'>
 						<div class='card-header'>
@@ -41,9 +41,10 @@
 	<% else %>
 	<h3>
 		<%= current_user.email %>'s reservations
+		<br>
 	</h3>
 		<div class='calendar'></div>
-		<% @user.reservations.each do |r| %>
+		<% current_user.reservations.each do |r| %>
 			<br>
 			<div class='card'>
 				<div class='card-header'>

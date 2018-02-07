@@ -3,13 +3,15 @@ initialize_calendar = function () {
 
       $('.calendar').each(function(){
         var event_source
-        var venue_fix = '/venues/' + gon.venue_id
         if (gon.venue_id != null) {
-
-          event_source = venue_fix + '/reservations.json';
+          //we're on /new page
+          event_source = '/venues/' + gon.venue_id + '/reservations.json';
         } else {
-          event_source = '/users/' + gon.user_id + '/reservations.json'
+          event_source = null
         }
+
+        var user_events = '/users/' + gon.user_id + '/reservations.json'
+
 
         var redirect_hack
         if (document.location.href.includes('/new')){
@@ -19,11 +21,24 @@ initialize_calendar = function () {
           redirect_hack = 'reservations/'
         }
 
-
+        var event_ids = []
         var businessHours = gon.venue_business;
         var calendar = $(this);
         calendar.fullCalendar({
-          events: event_source,
+          eventColor: '#2ecc71',
+          eventSources: [
+              {
+                url: user_events,
+                color: '#2ecc71',
+              },
+              {
+                url: event_source,
+                color: '#E74C3C',
+                error: function() {
+                    alert('Viewing user reservations!');
+                },
+              }
+          ],
           defaultView: 'agendaWeek',
           height:500,
           header: {
@@ -35,10 +50,69 @@ initialize_calendar = function () {
           selectHelper: true,
           editable: false,
           eventOverlap: false,
+          slotEventOverlap: false,
+
+          eventOrder: "-source", //neccessary to make user events load first.
+          eventRender: function(event, element) {
+              element.tooltip({
+                  content: event.title
+              });
+              /*
+              if(event.color == null) {
+                  element.css('background-color', 'green');
+              };*/
+
+              //HACKY JAVASCRIPT TO PREVENT DUPLICATE RENDERING
+
+              if(event_ids.includes(event.id) && event.title != null) {
+                return false;
+              }
+              event_ids.push(event.id)
+          },
+          eventAfterAllRender: function(view) {
+            event_ids = []
+          },
+          /*
+
+          eventMouseover: function (event, element) {
+            var tooltip = event.title;
+
+            $(this).attr("data-original-title", tooltip)
+            $(this).popover({title: 'Hi', container: "body"})
+           },
+
+          //testing
+        
+          eventMouseover: function(calEvent, jsEvent) {
+
+              $(this).tooltip({title:calEvent.title, html: true, container: "body"});
+              $(this).tooltip('show');
+
+              
+              var tooltip = '<div class="tooltipevent" style="width:100px;height:100px;background:#ccc;position:absolute;z-index:10001;">' + calEvent.title + '</div>';
+              var $tooltip = $(tooltip).appendTo('body');
+
+              $(this).mouseover(function(e) {
+                  $(this).css('z-index', 10000);
+                  $tooltip.fadeIn('500');
+                  $tooltip.fadeTo('10', 1.9);
+              }).mousemove(function(e) {
+                  $tooltip.css('top', e.pageY + 10);
+                  $tooltip.css('left', e.pageX + 20);
+              });
+          },
+
+          eventMouseout: function(calEvent, jsEvent) {
+              $(this).css('z-index', 8);
+              $('.tooltipevent').remove();
+          },
+              */
+
+          // testing ^
+
           selectOverlap: function(event) {
               return event.rendering === 'background';
           },
-          slotEventOverlap: false,
           eventLimit: true,
           allDaySlot: false,
           eventClick: function(calEvent, jsEvent, view) {

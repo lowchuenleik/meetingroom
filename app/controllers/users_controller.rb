@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
-  	@user = User.find_by(username: (params[:username]))
+  	#@user = User.find_by(username: (params[:username]))
+    @user = User.find(params[:user_id])
   end
 
   def edit
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
                                  :provider,
                                  :uid,
                                  :publishable_key,
-                                 :access_code,
+                                 :access_code, :phone_number
                                 )
   end
 

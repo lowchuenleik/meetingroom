@@ -21,8 +21,9 @@
     <% end %>
   <% end %>
 
+  <br>
   <div class='card-deck'>
-    <% @merchants.each do |merchant| %>
+    <% @user.merchants.each do |merchant| %>
       <div class="col-lg-4">
         <div class="card text-center" style="margin-bottom: 1em">
           <div class="card-header">
@@ -34,27 +35,17 @@
             </p>
           </div>
           <div class="card-body">
-            <% if current_user == merchant.user %>
-              <div class="btn-group" role="group" aria-label="hmmm">
-                  <button type='button' class="btn btn-md btn-link">
-                    <%= link_to 'Show', merchant %>
-                  </button>
-                  <button type='button' class="btn btn-md btn-link">
-                    <%= link_to 'Edit', edit_merchant_path(merchant) %>
-                  </button>
-                  <button type='button' class="btn btn-md btn-link">
-                    <%= link_to 'Destroy', merchant, method: :delete, data: { confirm: 'Are you sure?' } %>
-                  </button>
-              </div>
-            <% else %>
-              <div class="row">
-                <div class="col-xs-12 text-right">
-                  <button type='button' class="btn btn-md btn-link">
-                    <%= link_to 'Show', merchant %>
-                  </button>
-                </div>
-              </div>
-            <% end %>
+            <div class="btn-group" role="group" aria-label="hmmm">
+                <button type='button' class="btn btn-md btn-link">
+                  <%= link_to 'Show', merchant %>
+                </button>
+                <button type='button' class="btn btn-md btn-link">
+                  <%= link_to 'Edit', edit_merchant_path(merchant) %>
+                </button>
+                <button type='button' class="btn btn-md btn-link">
+                  <%= link_to 'Destroy', merchant, method: :delete, data: { confirm: 'Are you sure?' } %>
+                </button>
+            </div>
           </div>
         </div>
       </div>
@@ -62,7 +53,7 @@
   </div>
 
   <div class="btn btn-lg btn-link">
-    <%= link_to 'New Merchant', new_user_merchant_path(@user) %>
+    <%= link_to 'New Venue', new_user_merchant_path(@user) %>
   </div>
 
   <br>

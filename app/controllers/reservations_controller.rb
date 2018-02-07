@@ -10,7 +10,7 @@ class ReservationsController < ApplicationController
       @reservations = @venue.reservations
     else
       @user = current_user
-      @reservations = @user.reservations
+      @reservations = current_user.reservations
     end
 
   end
@@ -44,7 +44,7 @@ class ReservationsController < ApplicationController
       redirect_to confirmation_venue_reservations_path
 
     elsif params[:block_out]
-      @reservation.color = '#E74C3C'
+      #@reservation.color = '#E74C3C'
       respond_to do |format|
         if @reservation.save! # - GOES THROUGH OKAY
           format.html { redirect_to venue_reservation_url(@venue, @reservation), notice: 'Time slot blocked out.' }
@@ -56,7 +56,7 @@ class ReservationsController < ApplicationController
       end
 
     elsif @reservation.valid?
-      @reservation.color = '#2ecc71'
+      #@reservation.color = '#2ecc71'
       token = params[:stripeToken]
 
       # Charge the user's card:
@@ -75,7 +75,7 @@ class ReservationsController < ApplicationController
 
       respond_to do |format|
         if @reservation.save! # - GOES THROUGH OKAY
-          format.html { redirect_to venue_reservation_url(@venue, @reservation), notice: 'Reservation was successfully created.' }
+          format.html { redirect_to venue_reservation_url(@venue, @reservation,fresh: 'fresh'), notice: 'Reservation was successfully created.' }
           format.json { render :show, status: :created, location: @reservation }
         else
           format.html { render :new }
@@ -151,7 +151,7 @@ class ReservationsController < ApplicationController
       end
       #gon.venue_business = @venue.business_hours HAVE TO IMPLEMENT
       @user = current_user
-      gon.user_id = @user.id
+      gon.user_id = current_user.id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
