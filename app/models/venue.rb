@@ -6,7 +6,7 @@ class Venue < ApplicationRecord
 	belongs_to :merchant
 
 	geocoded_by :street_address   # can also be an IP address
-	after_validation :geocode          # auto-fetch coordinates
+	after_validation :geocode, :if => lambda{ |obj| obj.address_changed? }        # auto-fetch coordinates
 
 	def remove_blanks
 		self.images = self.images.reject { |x| x.empty? }

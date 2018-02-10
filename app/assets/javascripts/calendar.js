@@ -52,7 +52,7 @@ initialize_calendar = function () {
           eventOverlap: false,
           slotEventOverlap: false,
 
-          eventOrder: "-source", //neccessary to make user events load first.
+          eventOrder: "-color", //neccessary to make user events load first.
           eventRender: function(event, element) {
               element.tooltip({
                   content: event.title
@@ -68,6 +68,11 @@ initialize_calendar = function () {
                 return false;
               }
               event_ids.push(event.id)
+
+              if(event.user == gon.user_id) {
+
+              }
+
           },
           eventAfterAllRender: function(view) {
             event_ids = []
@@ -140,7 +145,15 @@ initialize_calendar = function () {
             $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'))
             $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
 
-            $('#testing').val(moment(end).format('YYYY-MM-DD HH:mm'));
+
+            
+
+            $.ajax({
+              url: '/time_preview',
+              type: 'post',
+              dataType: 'script',
+              data: {"start": moment(start).format("YYYY-MM-DD HH:mm")},
+            })
 
             if (!start.startOf('day').isSame(end.startOf('day'))) {
                  calendar.fullCalendar( 'unselect' );

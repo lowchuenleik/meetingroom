@@ -4,6 +4,7 @@ json.array! @reservations do |reservation|
   json.title reservation.name
   json.id reservation.id
   json.color reservation.color
+  json.user reservation.user.id
   json.start reservation.start.strftime(date_format)
   json.end reservation.end.strftime(date_format)
   json.allDay reservation.all_day_reservation? ? true : false

@@ -3,7 +3,9 @@
     <%= f.input :name, as: :hidden %>
     <%= f.input :date_range,as: :hidden, input_html: { class: "date-range-picker input-md form-control"} %>
     <%= f.input_field :start, as: :hidden, value: Date.today, class: 'start_hidden' %>
+
     <%= f.input_field :end, as: :hidden, value: Date.today, class: 'form-control input-md end_hidden' %>
+
 
   </div>
 

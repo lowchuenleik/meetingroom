@@ -42,10 +42,48 @@ h1#landing {
   margin-top: 1em;
 }
 
-h1#venue {
-  font-size: 80px;
+
+//venue show styling
+
+.showing-title {
+  font-size:4rem;
+  font-weight:500;
 }
 
+.jumbotron-showing{
+  padding:2rem 1rem;
+  background-color: #e9ecef;
+  border-radius:.6rem;
+}
+
+.card-showing-right {
+  margin-top:.3em;
+}
+
+.showing-subheading{
+  font-size:1.5rem;
+  font-weight:400;
+}
+
+.showing-heading{
+  font-weight:bold;
+  font-size:20px;
+  margin-bottom:1em;
+}
+
+.showing{
+  font-size:15px;
+  margin-bottom:.75em;
+  font-weight:400;
+}
+
+
+//mapstyle!
+
+#venue_map {
+  height: 400px;
+  width: 90%;
+}
 
 //home page icons stuff
 
@@ -63,9 +101,6 @@ h1#venue {
     padding-bottom: 0;
     margin-right:2rem;
 }
-
-
-
 
 #navbar {
   color:#FBFBFB;

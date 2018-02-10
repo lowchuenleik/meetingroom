@@ -44,7 +44,8 @@ Rails.application.routes.draw do
   	get "signup", to:'devise/registrations#new'
   end
 
-  get'reservations', to:'reservations#index'
+  post '/time_preview', to:'reservations#time_preview'
+  get 'reservations', to:'reservations#index'
 
   post '/send_mail', to:'reservations#send_mail'
 

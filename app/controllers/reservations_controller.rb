@@ -96,6 +96,11 @@ class ReservationsController < ApplicationController
     redirect_to root_path
   end
 
+  def time_preview
+    @reservation = Reservation.new #(start:params[:start])
+    @reservation.start = params[:start]
+  end
+
   # PATCH/PUT /reservations/1
   # PATCH/PUT /reservations/1.json
   def update

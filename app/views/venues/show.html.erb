@@ -36,33 +36,45 @@
 
   <div class="row">
     <div class="col-md-8">
-      <h1 class="card-title" id="venue"><%= @venue.name %></h1>
-      <p class="card-text"><h2><%= @venue.byline %></h2></p>
-      <br>
-      <p class='card-text lead'> Seats <%= @venue.capacity %> </p>
-      <p class='card-text lead'> Located at: <%= @venue.street_address %> </p>
+      <hr class="my-4">
+      <h1 class="card-title showing-title" id="venue"><%= @venue.name %></h1>
+      <p class="card-text showing-subheading"><%= @venue.byline %></p>
+      <hr class="my-4">
+      <p class='card-text showing-heading'>Hosted by <%=@venue.merchant.title%></p>
+      <div class="jumbotron jumbotron-showing">
+      <p class='lead'>Cosy and quiet. Perfect for brainstorming</p> 
+      <!-- Over here, to do is to either make it the byline, or add a venue comement, as well as to make it such that a modal pops up with further details. -->
+    </div>
+      <hr class="my-4">
+      <p class='card-text showing-heading'>Seats: <%= @venue.capacity %></p>
+      <p class='card-text showing-heading'>Location</p>
+      <p class='card-text showing'><%= @venue.street_address %></p>
+
+ 
 
       <br>
-
+      <div id="venue_map"></div>
+      <!--  
       <iframe
         width="100%"
         height="450"
         frameborder="0" style="border:0"
         src="<%= google_embed_view([@venue.latitude,@venue.longitude].join(','))%>" allowfullscreen>
+        -->
       </iframe>
     </div>
     <div class="col-md-4">
-      <div class="card">
+      <div class="card card-showing-right">
           <div class='card-body'>
-            <h1 class='strong'><strong>£ <%= @venue.price %> </strong>/ h </h1>
+            <h1 class='strong'><strong>£ <%= @venue.price %> </strong><h4>/ h </h4></h1>
             <!-- 
             <%= image_tag google_static([@venue.latitude,@venue.longitude].join(',')), style:'height:100%;width:100%' %>
              -->
 
           </div>
-          <div class='card-footer'>
+          <div class='card-footer justify-content-center' style='text-align:center;'>
             <% if user_signed_in? %>
-            <h3><%= link_to "Book now", new_venue_reservation_path(@venue, @reservation), class:'btn btn-primary' %></h3>
+            <h3><%= link_to "Book now", new_venue_reservation_path(@venue, @reservation), class:'btn btn-primary btn-block' %></h3>
             <% end %>
             <% if current_user == @venue.merchant.user %>
               <%= link_to 'Edit', edit_venue_path(@venue) %> | 
@@ -76,3 +88,22 @@
 
 
 </div>
+
+<script type='text/javascript'>
+  function initMap() {
+          var center_coords = {lat: <%=@venue.latitude%>, lng: <%=@venue.longitude%>}
+          var map = new google.maps.Map(document.getElementById('venue_map'), {
+            zoom: 14,
+            center: center_coords,
+          });
+          var marker = new google.maps.Marker({
+            position: center_coords,
+            map: map
+          });
+        }
+</script>
+
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_API']%>&callback=initMap" async defer>
+</script>
