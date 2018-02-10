@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :events
   resources :bookings
   resources :photos
-  get 'users/:username', to: "users#show", as: 'user'
+  #get 'users/:username', to: "users#show", as: 'user'
 
 
   resources :clients do 
