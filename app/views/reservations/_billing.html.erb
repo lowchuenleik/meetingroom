@@ -1,6 +1,6 @@
 <div class="card text-center">
   <h5 id="card-unavailable"></h5>
-  Insert card information here!
+  Insert payment details.
   <div class="card-body">
     <%= form_for [@venue,@reservation], html: {class:'form-horizontal add-card', id:"payment-form"} do |f| %>
       <%= f.hidden_field :name, value: @venue.name%>
@@ -9,7 +9,7 @@
       <%= f.hidden_field :color, as: :hidden, value: @reservation.color %>
       <div class="form-row">
         <label for="card-element">
-          Credit or debit card!
+          Credit/Debit card:
         </label>
         <!-- <%= text_field_tag :card_number, nil, name: nil, class: 'form-control', data: {stripe: 'number' }, placeholder: 'Card Number' %> -->
         <div id="card-element" >
@@ -19,7 +19,7 @@
       <div id="card-errors" role="alert"></div>
       <br>
       <div class="form-actions">
-        <%= f.button :Pay, class:'btn btn-primary', data:{ disable_with: "Please wait..." }%>
+        <%= f.button "Confirm & Pay", class:'btn btn-primary', data:{ disable_with: "Please wait..." }%>
 
         <%= link_to 'Delete',  
                     venue_reservation_path, 

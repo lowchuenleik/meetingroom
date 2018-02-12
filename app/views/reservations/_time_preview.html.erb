@@ -1,3 +1,4 @@
+<!-- 
 <div class="modal fade" id="time_preview">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -11,6 +12,9 @@
     </div>
   </div>
 </div>
+ -->
+<hr class="my-2">
 
-<h1> <%= @reservation.start %> </h1>
+<h2 class='strong'>  <%= @reservation.start.strftime("%A, %d %b %Y %l:%M %p to") %><%= @reservation.end.strftime(" %I:%M%p")%> </h2>
 
+<hr class="my-2">

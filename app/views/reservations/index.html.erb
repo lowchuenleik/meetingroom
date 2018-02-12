@@ -5,38 +5,20 @@
 			<%= @venue.name %>'s reservations
 		</h3>
 		<br>
-		<% if @user = @venue.merchant.user %>
-			<div class='calendar'></div> 
-			<% @reservations.each do |r| %>
-				<br>
-				<div class='card'>
-					<div class='card-header'>
-						On <%= r.start.to_date %> from <%= r.start.strftime("%I:%M%p") %> to <%= r.end.strftime("%I:%M%p") %></p>
-					</div>
-					<div class='card-body'>
-						<%= r.price %>
-					</div>
-					<div class='card-footer'>
-						<span> <%=r.name%> </span>
-					</div>
+		<div class='calendar'></div> 
+		<% @reservations.each do |r| %>
+			<br>
+			<div class='card'>
+				<div class='card-header'>
+					On <%= r.start.to_date %> from <%= r.start.strftime("%I:%M%p") %> to <%= r.end.strftime("%I:%M%p") %></p>
 				</div>
-			<% end %>
-		<% else %>
-			<div class='user_cal'></div>
-			<% @user.reservations.each do |r| %>
-				<br>
-					<div class='card'>
-						<div class='card-header'>
-							On <%= r.start.to_date %> from <%= r.start.strftime("%I:%M%p") %>to <%= r.end.strftime("%I:%M%p") %></p>
-						</div>
-						<div class='card-body'>
-							<%= r.price %>
-						</div>
-						<div class='card-footer'>
-							<span> <%=r.name%> </span>
-						</div>
-					</div>
-			<% end %>
+				<div class='card-body'>
+					<%= r.price %>
+				</div>
+				<div class='card-footer'>
+					<span> <%=r.name%> </span>
+				</div>
+			</div>
 		<% end %>
 	<% else %>
 	<h3>

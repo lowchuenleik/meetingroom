@@ -152,7 +152,7 @@ initialize_calendar = function () {
               url: '/time_preview',
               type: 'post',
               dataType: 'script',
-              data: {"start": moment(start).format("YYYY-MM-DD HH:mm")},
+              data: {"start": moment(start).format("YYYY-MM-DD HH:mm"),"end": moment(end).format('YYYY-MM-DD HH:mm')},
             })
 
             if (!start.startOf('day').isSame(end.startOf('day'))) {

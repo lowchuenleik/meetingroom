@@ -6,11 +6,12 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    if @venue != nil
+    if @venue != nil && curent_user == @venue.user
       @reservations = @venue.reservations
     else
       @user = current_user
       @reservations = current_user.reservations
+      redirect_to '/reservations'
     end
 
   end
@@ -99,6 +100,7 @@ class ReservationsController < ApplicationController
   def time_preview
     @reservation = Reservation.new #(start:params[:start])
     @reservation.start = params[:start]
+    @reservation.end = params[:end]
   end
 
   # PATCH/PUT /reservations/1

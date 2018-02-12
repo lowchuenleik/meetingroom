@@ -1,7 +1,27 @@
 <div class='container'>
+
+  <% if params[:fresh] %>
+    <div class="jumbotron">
+      <h3 class="display-5">Thank you for booking your space with us!</h3>
+      <p class="lead"><strong>#<%= @reservation.id %></strong> is your reservation order number, we really appreciate it.</p>
+      <hr class="my-4">
+      <p>Feel free to check out our other spaces to make more bookings.</p>
+      <p class="lead">
+        <%= link_to "Come check out our other spaces", venues_path, class: "btn btn-primary btn-md" %>
+      </p>
+    </div>
+  <% end %>
+
+  <!-- 
+  <%= link_to 'Edit', edit_venue_reservation_path(@venue, @reservation) if @user == @reservation.user %> |
+   -->
+  <%= link_to 'Back', venues_path %>
+</div>
+<!--  
+<p>
+
   <p id="notice"><%= notice %></p>
 
-  <p>
     <strong>Name:</strong>
     <%= @reservation.name %>
   </p>
@@ -35,20 +55,4 @@
     <strong>Venue:</strong>
     <%= @reservation.venue_id %>
   </p>
-
-
-  <% if params[:fresh] %>
-    <div class="jumbotron">
-      <h3 class="display-5">Thank you for booking your space with us!</h3>
-      <p class="lead"><strong>#<%= @reservation.id %></strong> is your reservation order number, we really appreciate it.</p>
-      <hr class="my-4">
-      <p>Feel free to check out our other spaces to make more bookings.</p>
-      <p class="lead">
-        <%= link_to "Book now", venues_path, class: "btn btn-primary btn-lg" %>
-      </p>
-    </div>
-  <% end %>
-
-  <%= link_to 'Edit', edit_venue_reservation_path(@venue, @reservation) if @user == @reservation.user %> |
-  <%= link_to 'Back', venue_reservations_path %>
-</div>
+-->

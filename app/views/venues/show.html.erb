@@ -66,15 +66,15 @@
     <div class="col-md-4">
       <div class="card card-showing-right">
           <div class='card-body'>
-            <h1 class='strong'><strong>£ <%= @venue.price %> </strong><h4>/ h </h4></h1>
+            <h1 class='strong'><strong>£ <%= @venue.price %> </strong><small class='text-muted'>/h</small></h1>
             <!-- 
             <%= image_tag google_static([@venue.latitude,@venue.longitude].join(',')), style:'height:100%;width:100%' %>
              -->
 
           </div>
           <div class='card-footer justify-content-center' style='text-align:center;'>
-            <% if user_signed_in? %>
             <h3><%= link_to "Book now", new_venue_reservation_path(@venue, @reservation), class:'btn btn-primary btn-block' %></h3>
+            <% if user_signed_in? %>
             <% end %>
             <% if current_user == @venue.merchant.user %>
               <%= link_to 'Edit', edit_venue_path(@venue) %> | 
