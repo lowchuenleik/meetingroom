@@ -3,18 +3,39 @@ class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy, :process_charge]
   before_action :set_venue_and_user
 
+  include ActionView::Helpers::UrlHelper
+
   # GET /reservations
   # GET /reservations.json
   def index
-    if @venue != nil && curent_user == @venue.user
+    respond_to do |format|
+      format.html {index_html}
+      format.json {index_json}
+    end
+  end
+
+  def index_html
+    if @venue != nil && current_user == @venue.merchant.user
       @reservations = @venue.reservations
-    else
+    elsif current_page?(reservations_path)
       @user = current_user
       @reservations = current_user.reservations
-      redirect_to '/reservations'
+    else
+      redirect_to reservations_path
     end
-
   end
+
+  def index_json
+    if @venue != nil && current_user == @venue.merchant.user
+      @reservations = @venue.reservations
+    elsif current_page?(reservations_path)
+      @user = current_user
+      @reservations = current_user.reservations
+    else
+      redirect_to reservations_path
+    end
+  end
+
 
   # GET /reservations/1
   # GET /reservations/1.json
@@ -24,7 +45,6 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   def new
     @reservation = Reservation.new
-
   end
 
   # GET /reservations/1/edit
