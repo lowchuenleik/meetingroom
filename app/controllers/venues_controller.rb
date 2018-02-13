@@ -77,8 +77,10 @@ class VenuesController < ApplicationController
     def set_merchant
       if params[:merchant_id]
         @merchant =  Merchant.find(params[:merchant_id])
-      else
+      elsif @merchant == nil
         @merchant = @venue.merchant
+      else
+        redirect_to root_path
       end
     end
 
