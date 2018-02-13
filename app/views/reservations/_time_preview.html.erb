@@ -13,8 +13,11 @@
   </div>
 </div>
  -->
+<br>
 <hr class="my-2">
 
-<h2 class='strong'>  <%= @reservation.start.strftime("%A, %d %b %Y %l:%M %p to") %><%= @reservation.end.strftime(" %I:%M%p")%> </h2>
+<p class='lead'> Time selected : </p>
+
+<h2 class='strong' style='font-weight:bold'><%= @reservation.start.strftime("%A, %d %b %Y %l:%M %p to") %><%= @reservation.end.strftime(" %I:%M%p")%> </h2>
 
 <hr class="my-2">

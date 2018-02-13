@@ -13,7 +13,7 @@
 					<h5 class='card-title'><%= @reservation.name %></h5>
 					<h3 class='card-title'><%= @venue.name %> </h3>
 					<p class='card-text'>On <%= @reservation.start.strftime("%A, %d %b %Y") %> from <%= @reservation.start.strftime("%I:%M%p") %> to <%= @reservation.end.strftime("%I:%M%p") %></p>
-					<p class='card-text price-confirmation'><strong>£<%= @reservation.calc_amount(@venue.price) %> </strong> </p>
+					<p class='card-text price-confirmation'>Amount to be charged: <strong>£<%= @reservation.calc_amount(@venue.price) %> </strong> </p>
 					<br>
 
 					<%= link_to 'Back', new_venue_reservation_path, class:'btn btn-primary' %>

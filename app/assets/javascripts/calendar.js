@@ -20,8 +20,6 @@ initialize_calendar = function () {
         } else {
           redirect_hack = 'reservations/'
         }
-
-        var event_ids = []
         var businessHours = gon.venue_business;
         var calendar = $(this);
         calendar.fullCalendar({
@@ -35,8 +33,9 @@ initialize_calendar = function () {
                 url: event_source,
                 color: '#E74C3C',
                 error: function() {
-                    alert('Viewing user reservations!');
+                    alert('Eror viewing user reservations!');
                 },
+
               }
           ],
           defaultView: 'agendaWeek',
@@ -50,10 +49,10 @@ initialize_calendar = function () {
           selectHelper: true,
           editable: false,
           eventOverlap: false,
-          slotEventOverlap: false,
 
-          eventOrder: "-color", //neccessary to make user events load first.
+          eventOrder: "source", //neccessary to make user events load first.
           eventRender: function(event, element) {
+
               element.tooltip({
                   content: event.title
               });
@@ -63,19 +62,23 @@ initialize_calendar = function () {
               };*/
 
               //HACKY JAVASCRIPT TO PREVENT DUPLICATE RENDERING
-
+              //console.log(event.user, event.source.color)
+              
+              if ((event.user == gon.user_id && event.source.color == '#2ecc71') || (event.user != gon.user_id)) {
+                console.log('Rendered!')
+                return true
+              } else {
+                console.log('Event ignored',event.id, event.user, event.source.color)
+                return false
+              }
+              /*
               if(event_ids.includes(event.id) && event.title != null) {
                 return false;
               }
               event_ids.push(event.id)
-
-              if(event.user == gon.user_id) {
-
-              }
-
+              */
           },
           eventAfterAllRender: function(view) {
-            event_ids = []
           },
           /*
 
