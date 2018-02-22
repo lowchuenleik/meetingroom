@@ -8,6 +8,10 @@
      -->
     <title>Hang - Meetings Sorted</title>
 
+    <% if content_for? :live_chat %>
+      <%= yield :live_chat %>
+    <% end %>
+
     <%= favicon_link_tag 'logo.ico' %>
 
     <%= csrf_meta_tags %>
@@ -16,6 +20,7 @@
     <%= include_gon(:init => true) %>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>

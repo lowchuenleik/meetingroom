@@ -148,19 +148,19 @@ initialize_calendar = function () {
             $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'))
             $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
 
-
-            
-
-            $.ajax({
+            if (!start.startOf('day').isSame(end.startOf('day'))) {
+                 calendar.fullCalendar( 'unselect' );
+            } else if(start.isBefore(moment())) {
+                calendar.fullCalendar( 'unselect');
+            } else {
+              $.ajax({
               url: '/time_preview',
               type: 'post',
               dataType: 'script',
               data: {"start": moment(start).format("YYYY-MM-DD HH:mm"),"end": moment(end).format('YYYY-MM-DD HH:mm')},
             })
-
-            if (!start.startOf('day').isSame(end.startOf('day'))) {
-                 calendar.fullCalendar( 'unselect' );
             }
+
           },
           /*
           select: function(start, end) {
