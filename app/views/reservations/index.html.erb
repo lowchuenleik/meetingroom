@@ -21,11 +21,64 @@
 			</div>
 		<% end %>
 	<% else %>
-	<h3>
+	<h3 id='reservations_index_user'>
 		<%= current_user.email %>'s reservations
 		<br>
 	</h3>
+	<br>
 		<div class='calendar'></div>
+		<br>
+		<br>
+		<div class="flextable table-actions">
+		  <div class="flextable-item flextable-primary">
+		    <div class="btn-toolbar-item input-with-icon">
+		      <input type="text" class="form-control input-block" placeholder="Search orders">
+		      <span class="icon icon-magnifying-glass"></span>
+		    </div>
+		  </div>
+		  <div class="flextable-item">
+		    <div class="btn-group">
+		      <button type="button" class="btn btn-outline-primary">
+		        <span class="icon icon-pencil"></span>
+		      </button>
+		      <button type="button" class="btn btn-outline-primary">
+		        <span class="icon icon-erase"></span>
+		      </button>
+		    </div>
+		  </div>
+		</div>
+		<br>
+		<div class="table-responsive">
+			<table class='table' data-sort='table'>
+			  <thead>
+			    <tr>
+			      <th>ID</th>
+			      <th>Name</th>
+			      <th>Price</th>
+			      <th>Start</th>
+			      <th>End</th>
+			      <th>Venue</th>
+			      <th colspan="3"></th>
+			    </tr>
+			  </thead>
+
+			  <tbody>
+			    <% @current_user.reservations.each do |reservation| %>
+			      <tr>
+			        <td><%= reservation.id %></td>
+			        <td><%= reservation.name %></td>
+			        <td><%= reservation.price %></td>
+			        <td><%= reservation.start.strftime("%I:%M%p") %></td>
+			        <td><%= reservation.end.strftime("%I:%M%p") %></td>
+			        <td><%= reservation.venue.name%></td>
+			        <td><%= link_to 'Show', reservation %></td>
+			        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			      </tr>
+			    <% end %>
+			  </tbody>
+			</table>
+		</div>
+<!-- 
 		<% current_user.reservations.each do |r| %>
 			<br>
 			<div class='card'>
@@ -41,5 +94,5 @@
 			</div>
 		<% end %>
 	<% end %>
-
+ -->
 </div>

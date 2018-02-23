@@ -5,12 +5,12 @@
     <% if content_for? :admin_venues %>
       <%= yield :admin_venues %>
     <% end %>
-     -->
-    <title>Hang - Meetings Sorted</title>
-
     <% if content_for? :live_chat %>
       <%= yield :live_chat %>
     <% end %>
+     -->
+    
+    <title>Hang - Meetings Sorted</title>
 
     <%= favicon_link_tag 'logo.ico' %>
 
@@ -21,6 +21,29 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
     <script src="https://js.stripe.com/v3/"></script>
+
+    <script type='text/javascript'>
+    !function() {
+      var t;
+      if (t = window.driftt = window.drift = window.driftt || [], !t.init) return t.invoked ? void (window.console && console.error && console.error("Drift snippet included twice.")) : (t.invoked = !0, 
+      t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+      t.factory = function(e) {
+        return function() {
+          var n;
+          return n = Array.prototype.slice.call(arguments), n.unshift(e), t.push(n), t;
+        };
+      }, t.methods.forEach(function(e) {
+        t[e] = t.factory(e);
+      }), t.load = function(t) {
+        var e, n, o, i;
+        e = 3e5, i = Math.ceil(new Date() / e) * e, o = document.createElement("script"), 
+        o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + i + "/" + t + ".js", 
+        n = document.getElementsByTagName("script")[0], n.parentNode.insertBefore(o, n);
+      });
+    }();
+    drift.SNIPPET_VERSION = '0.3.1';
+    drift.load('v6h4rwyi4wpu');
+    </script>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -73,8 +96,8 @@
         <hr>
 
         <nav class='nav justify-content-lg-center'>
-          <a class="nav-link"><strong><%= link_to "About", about_path, class: "nav-link" %></strong></a>
-          <a class="nav-link"><strong><%= link_to "Contact", contact_us_path, class: "nav-link" %></strong></a>
+          <a class="nav-link"><strong><%= link_to "About", '#', class: "nav-link" %></strong></a>
+          <a class="nav-link"><strong><%= link_to "Contact", '#', class: "nav-link" %></strong></a>
           <a class="nav-link"><strong><%= link_to "Venues", venues_path, class: "nav-link" %></strong></a>
         </nav>
 
