@@ -1,11 +1,11 @@
 date_format = reservation.all_day_reservation? ? '%Y-%m-%d' : '%Y-%m-%dT%H:%M:%S'
 
 json.title reservation.name
-json.id reservation.id
 json.start reservation.start.strftime(date_format)
 json.end reservation.end.strftime(date_format)
 json.color reservation.color
 json.user reservation.user.id
+json.id reservation.id
 
 json.allDay reservation.all_day_reservation? ? true : false
 

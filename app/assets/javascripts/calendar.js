@@ -5,14 +5,13 @@ initialize_calendar = function () {
         var event_source
         if (gon.venue_id != null) {
           //we're on /new page
+          console.log('VENUE NOT NULL')
           event_source = '/venues/' + gon.venue_id + '/reservations.json';
         } else {
           event_source = null
         }
 
         var user_events = '/users/' + gon.user_id + '/reservations.json'
-
-
         var redirect_hack
         if (document.location.href.includes('/new')){
           redirect_hack = ''
@@ -22,22 +21,52 @@ initialize_calendar = function () {
         }
         var businessHours = gon.venue_business;
         var calendar = $(this);
+        var event_ids = []
         calendar.fullCalendar({
-          eventColor: '#2ecc71',
           eventSources: [
               {
                 url: user_events,
                 color: '#2ecc71',
+                id: 'testing',
+                rendering: 'background',
+                //backgroundColor: '#abeac6',
               },
               {
                 url: event_source,
                 color: '#E74C3C',
-                error: function() {
-                    alert('Eror viewing user reservations!');
-                },
-
               }
           ],
+          /*
+          events: [
+          {
+            title: 'tESTING HELLO',
+            start: '2018-02-27T10:30:00',
+            end: '2018-02-27T12:30:00',
+            rendering: 'background'
+          },
+          {
+            start: '2018-02-27T10:00:00',
+            end: '2018-02-27T12:30:00',
+            rendering: 'background'
+          },
+          {
+            start: '2018-02-27T10:30:00',
+            end: '2018-02-27T12:30:00',
+            rendering: 'background'
+          },
+          {
+             title: 'Meeting1',
+            start: '2018-02-27T11:30:00',
+          },
+          {
+             title: 'Meeting2',
+            start: '2018-02-27T12:15:00'
+          },
+          {
+             title: 'Meeting3',
+            start: '2018-02-27T12:30:00'
+          }
+        ],*/
           defaultView: 'agendaWeek',
           height:500,
           header: {
@@ -48,37 +77,59 @@ initialize_calendar = function () {
           selectable :true,
           selectHelper: true,
           editable: false,
-          eventOverlap: false,
-
-          eventOrder: "source", //neccessary to make user events load first.
+          unselectAuto: false,
+          displayEventTime: true,
+          eventLimit: true,
+          allDaySlot: false,
+          eventColor: '#2ecc71',
+          minTime: "07:00:00",
+          maxTime: "21:00:00",
+          selectOverlap: false,
+          //eventOrder: "-color", //neccessary to make user events load first.
+          selectConstraint: {
+            start: moment().format('YYYY-MM-DD'),
+            end: '2100-01-01' // hard coded goodness unfortunately
+          },
           eventRender: function(event, element) {
 
-              element.tooltip({
-                  content: event.title
+              element.popover({
+                title: event.title,
+                content: event.description,
+                trigger: 'hover',
+                placement: 'top',
+                container: 'body'
               });
+              console.log(event.id)
+              
+
               /*
+
               if(event.color == null) {
                   element.css('background-color', 'green');
-              };*/
+              };
 
               //HACKY JAVASCRIPT TO PREVENT DUPLICATE RENDERING
               //console.log(event.user, event.source.color)
-              
+
               if ((event.user == gon.user_id && event.source.color == '#2ecc71') || (event.user != gon.user_id)) {
                 console.log('Rendered!')
+                event.rendering = 'background'
                 return true
               } else {
                 console.log('Event ignored',event.id, event.user, event.source.color)
                 return false
               }
-              /*
-              if(event_ids.includes(event.id) && event.title != null) {
+              
+              */
+              if(event_ids.includes(event.id) && event.title != null)  {
                 return false;
+              } else if (event_ids.includes(event.id) && event.color == '#E74C3C') {
+                return false
               }
               event_ids.push(event.id)
-              */
           },
           eventAfterAllRender: function(view) {
+            event_ids = []
           },
           /*
 
@@ -114,20 +165,21 @@ initialize_calendar = function () {
               $(this).css('z-index', 8);
               $('.tooltipevent').remove();
           },
-              */
 
           // testing ^
 
           selectOverlap: function(event) {
               return event.rendering === 'background';
           },
-          eventLimit: true,
-          allDaySlot: false,
-          eventClick: function(calEvent, jsEvent, view) {
-            document.location.href =  redirect_hack + calEvent.id
+              */
+
+          eventClick: function(event, jsEvent, view) {
+            //calendar.fullCalendar('updateEvent', event);
+            if (event.id != null) {
+              document.location.href =  redirect_hack + event.id
+            }
+            
           },
-          minTime: "07:00:00",
-          maxTime: "21:00:00",
           /*
           businessHours: [ // specify an array instead
               {
@@ -142,23 +194,22 @@ initialize_calendar = function () {
               }
           ],
           */
-          unselectAuto: false,
-          displayEventTime: true,
+          
           select: function(start, end) {
-            $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'))
-            $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
-
-            if (!start.startOf('day').isSame(end.startOf('day'))) {
-                 calendar.fullCalendar( 'unselect' );
-            } else if(start.isBefore(moment())) {
-                calendar.fullCalendar( 'unselect');
-            } else {
-              $.ajax({
+            $.ajax({
               url: '/time_preview',
               type: 'post',
               dataType: 'script',
               data: {"start": moment(start).format("YYYY-MM-DD HH:mm"),"end": moment(end).format('YYYY-MM-DD HH:mm')},
             })
+
+            if ((!start.startOf('day').isSame(end.startOf('day'))) || (start.isBefore(moment()))) {
+                alert('Please select it on the same day and after the current time')
+                $('.start_hidden').val(null)
+            } else {
+              $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'))
+              $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'))
+              
             }
 
           },

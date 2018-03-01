@@ -64,6 +64,9 @@
     <%= @reservation.venue_id %>
   </p>
 -->
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_API']%>&callback=initMap&libraries=places" async defer></script>
+
 <script type='text/javascript'>
   function initMap() {
           var center_coords = {lat: <%=@venue.latitude%>, lng: <%=@venue.longitude%>}
@@ -78,5 +81,3 @@
         }
 </script>
 
-
-<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_API']%>&callback=initMap" async defer></script>
