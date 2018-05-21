@@ -23,6 +23,7 @@ initialize_calendar = function () {
         var calendar = $(this);
         var event_ids = []
         calendar.fullCalendar({
+          themeSystem: 'bootstrap3',
           eventSources: [
               {
                 url: user_events,

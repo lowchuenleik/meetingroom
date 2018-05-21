@@ -26,6 +26,9 @@ class Reservation < ApplicationRecord
 		end
 	end
 
+	def before_present
+		if (self.end )
+
 	def randomize_id
 		begin
 			self.id = SecureRandom.random_number(1_000_000)
