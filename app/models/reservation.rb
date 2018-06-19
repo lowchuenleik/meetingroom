@@ -17,7 +17,6 @@ class Reservation < ApplicationRecord
 		self.price = (amount * venue_price).to_i
 	end
 
-
 	private
 
 	def minimum_time
@@ -26,8 +25,8 @@ class Reservation < ApplicationRecord
 		end
 	end
 
-	def before_present
-		if (self.end )
+	#def before_present
+	#	if (self.end )
 
 	def randomize_id
 		begin
@@ -44,7 +43,6 @@ class Reservation < ApplicationRecord
 	end
 
 	def make_charge()
-
 		charge = Stripe::Charge.create({
 		  # Total Amount user will be charged (in cents)
 		  amount: (total * 100).to_i,
@@ -67,6 +65,7 @@ class Reservation < ApplicationRecord
 		# if true we can update our attribute
 		# byebug
 		update_attributes(paid: true, stripe_charge: charge.id) if charge.paid?
+
 		begin
 
 		rescue => e
